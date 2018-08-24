@@ -1,13 +1,16 @@
 # Passa-palavra
 
 Trabalho passa palavra TIS1 PUC
+Referêcia: https://www.youtube.com/watch?v=UjTjFdgmbiU
+
+
 
 ## Objetivo do trabalho:
 O objetivo do trabalho é desenvolver uma aplicação mobile para o jogo **passa-palavra**.
 
 O jogo **passa-palavra** consiste em:
 
-Dadas as 24 letras do alfabeto, para cada letra será feita uma pergunta ao usuário, o usuário 
+Dadas as 24 letras do alfabeto, para cada letra será feita uma pergunta ao usuário, o usuário
 deverá responder esta pergunta com a letra selecionada naquele momento.
 
 ### Início:
@@ -51,9 +54,9 @@ Loop.
 
 Backlog:
 
-- 
-- 
-- 
+-
+-
+-
 
 ---
 
