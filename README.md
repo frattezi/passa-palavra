@@ -1,8 +1,8 @@
-# passa-palavra
+# Passa-palavra
 
 Trabalho passa palavra TIS1 PUC
 
-## Objetivo do trabalho
+## Objetivo do trabalho:
 O objetivo do trabalho é desenvolver uma aplicação mobile para o jogo **passa-palavra**.
 
 O jogo **passa-palavra** consiste em:
@@ -38,4 +38,24 @@ Loop.
 
 .
 
+---
 
+## Definição da persona:
+(opcional)
+- link persona-template: \<TODO ADD LINK>
+
+
+---
+## Histórias de usuário:
+
+
+---
+
+## Prototipação:
+
+
+---
+## Implementação:
+
+
+---
