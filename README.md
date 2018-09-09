@@ -41,7 +41,7 @@ Loop:
 
 - Pula a pergunta e vá para próxima rodada
 
-### Rodada 2:
+### Rodada 3:
 
 A,B,[C],D,E,F,G,H...Z
 
