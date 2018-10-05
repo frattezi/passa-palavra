@@ -1,287 +1,287 @@
-{"questoes": [
-    {"a": [
-      {
-        "pergunta-1": "Legume usado como enfeite de Halloween:",
-        "resposta-1": "Abobora"
-      },
-      {
-        "pergunta-2": "Fruta com coroa:",
-        "resposta-2": "Abacaxi"
-      }
-    ]},
+{"dados": [
+  {"letra": "a" , "questoes": [
+    {
+      "pergunta": "Legume usado como enfeite de Halloween:",
+      "resposta": "Abobora"
+    },
+    {
+      "pergunta": "Fruta com coroa:",
+      "resposta": "Abacaxi"
+    }
+  ]},
 
-    {"b": [
-      {
-        "pergunta-1": "Tub�rculo servido em lanchonetes, normalmente frito:",
-        "resposta-1": "Batata"
-      },
-      {
-        "pergunta-2": "Fruta rica em c�lcio:",
-        "resposta-2": "Banana"
-      }
-    ]},
+  {"letra": "b" , "questoes": [
+    {
+      "pergunta-1": "Tub�rculo servido em lanchonetes, normalmente frito:",
+      "resposta-1": "Batata"
+    },
+    {
+      "pergunta-2": "Fruta rica em c�lcio:",
+      "resposta-2": "Banana"
+    }
+  ]},
 
-    {"c": [
-      {
-        "pergunta-1": "Folha parecida com alface, s� que ruim:",
-        "resposta-1": "Couve"
-      },
-      {
-        "pergunta-2": "Legume favorito do Pernalonga",
-        "resposta-2": "Cenoura"
-      }
-    ]},
+  {"letra": "c" , "questoes": [
+    {
+      "pergunta-1": "Folha parecida com alface, só que ruim:",
+      "resposta-1": "Couve"
+    },
+    {
+      "pergunta-2": "Legume favorito do Pernalonga:",
+      "resposta-2": "Cenoura"
+    }
+  ]},
 
-    {"d": [
-      {
-        "pergunta-1": "",
-        "resposta-1": ""
-      },
-      {
-        "pergunta-2": "",
-        "resposta-2": ""
-      }
-    ]},
+  {"letra": "d" , "questoes": [
+    {
+      "pergunta-1": "Na ponta dos braços tem...:",
+      "resposta-1": "Dedos"
+    },
+    {
+      "pergunta-2": "Usados em jogos de RPG, possui 6 lados:",
+      "resposta-2": "Dados"
+    }
+  ]},
 
-    {"e": [
-      {
-        "pergunta-1": "Verdura favorita do Popeye:",
-        "resposta-1": "Espinafre"
-      },
-      {
-        "pergunta-2": "",
-        "resposta-2": ""
-      }
-    ]},
+  {"letra": "e" , "questoes": [
+    {
+      "pergunta-1": "Verdura favorita do Popeye:",
+      "resposta-1": "Espinafre"
+    },
+    {
+      "pergunta-2": "O milho nasce em uma...:",
+      "resposta-2": "Espiga"
+    }
+  ]},
 
-    {"f": [
-      {
-        "pergunta-1": "Normalmente comido em conserva:",
-        "resposta-1": "Figo"
-      },
-      {
-        "pergunta-2": "",
-        "resposta-2": ""
-      }
-    ]},
+  {"letra": "f" , "questoes": [
+    {
+      "pergunta-1": "Normalmente comido em conserva:",
+      "resposta-1": "Figo"
+    },
+    {
+      "pergunta-2": "Usado para assar alimentos:",
+      "resposta-2": "Forno"
+    }
+  ]},
 
-    {"g": [
-      {
-        "pergunta-1": "",
-        "resposta-1": ""
-      },
-      {
-        "pergunta-2": "",
-        "resposta-2": ""
-      }
-    ]},
+  {"letra": "g" , "questoes": [
+    {
+      "pergunta-1": "Usado em decorações, como tetos rebaixados:",
+      "resposta-1": "Gesso"
+    },
+    {
+      "pergunta-2": "Período referente a gravidez:",
+      "resposta-2": "Gestação"
+    }
+  ]},
 
-    {"h": [
-      {
-        "pergunta-1": "",
-        "resposta-1": ""
-      },
-      {
-        "pergunta-2": "",
-        "resposta-2": ""
-      }
-    ]},
+  {"letra": "h" , "questoes": [
+    {
+      "pergunta-1": "local onde se cuidam dos doentes:",
+      "resposta-1": "Hospital"
+    },
+    {
+      "pergunta-2": "Maquina voadora com hélices:",
+      "resposta-2": "Helicóptero"
+    }
+  ]},
 
-    {"i": [
-      {
-        "pergunta-1": "",
-        "resposta-1": ""
-      },
-      {
-        "pergunta-2": "",
-        "resposta-2": ""
-      }
-    ]},
+  {"letra": "i" , "questoes": [
+    {
+      "pergunta-1": "Local religioso cristão e católico:",
+      "resposta-1": "Igreja"
+    },
+    {
+      "pergunta-2": "Época/Estação do ano:",
+      "resposta-2": "Inverno"
+    }
+  ]},
 
-    {"j": [
-      {
-        "pergunta-1": "",
-        "resposta-1": ""
-      },
-      {
-        "pergunta-2": "",
-        "resposta-2": ""
-      }
-    ]},
+  {"letra": "j" , "questoes": [
+    {
+      "pergunta-1": "Animal parecido com a tartaruga:",
+      "resposta-1": "Jabuti"
+    },
+    {
+      "pergunta-2": "Serpente não venenosa:",
+      "resposta-2": "Jiboia"
+    }
+  ]},
 
-    {"k": [
-      {
-        "pergunta-1": "",
-        "resposta-1": ""
-      },
-      {
-        "pergunta-2": "",
-        "resposta-2": ""
-      }
-    ]},
+  {"letra": "k" , "questoes": [
+    {
+      "pergunta-1": "'Tudo que vai volta:'",
+      "resposta-1": "Karma"
+    },
+    {
+      "pergunta-2": "Personagem icônico da década de 30, subiu no Empire State Building:",
+      "resposta-2": "King Kong"
+    }
+  ]},
 
-    {"l": [
-      {
-        "pergunta-1": "",
-        "resposta-1": ""
-      },
-      {
-        "pergunta-2": "",
-        "resposta-2": ""
-      }
-    ]},
+  {"letra": "l" , "questoes": [
+    {
+      "pergunta-1": "Conjunto de papeis onde se registra algo, como histórias:",
+      "resposta-1": "Livro"
+    },
+    {
+      "pergunta-2": "Usado para fazer queijo e manteiga",
+      "resposta-2": "Leite"
+    }
+  ]},
 
-    {"m": [
-      {
-        "pergunta-1": "",
-        "resposta-1": ""
-      },
-      {
-        "pergunta-2": "",
-        "resposta-2": ""
-      }
-    ]},
+  {"letra": "m" , "questoes": [
+    {
+      "pergunta-1": "Usado para acertar pregos:",
+      "resposta-1": "Martelo"
+    },
+    {
+      "pergunta-2": "Uma pessoa fofa, carinhosa:",
+      "resposta-2": "Meiga"
+    }
+  ]},
 
-    {"n": [
-      {
-        "pergunta-1": "",
-        "resposta-1": ""
-      },
-      {
-        "pergunta-2": "",
-        "resposta-2": ""
-      }
-    ]},
+  {"letra": "n" , "questoes": [
+    {
+      "pergunta-1": "Transporte que leva pessoas e mercadorias pelo mar:",
+      "resposta-1": "Navio"
+    },
+    {
+      "pergunta-2": "Gordura do leite:",
+      "resposta-2": "Nata"
+    }
+  ]},
 
-    {"o": [
-      {
-        "pergunta-1": "",
-        "resposta-1": ""
-      },
-      {
-        "pergunta-2": "",
-        "resposta-2": ""
-      }
-    ]},
+  {"letra": "o" , "questoes": [
+    {
+      "pergunta-1": "Maior porção de água da terra:",
+      "resposta-1": "Oceano"
+    },
+    {
+      "pergunta-2": "Última letra do alfabeto grego:",
+      "resposta-2": "Omega"
+    }
+  ]},
 
-    {"p": [
-      {
-        "pergunta-1": "",
-        "resposta-1": ""
-      },
-      {
-        "pergunta-2": "",
-        "resposta-2": ""
-      }
-    ]},
+  {"letra": "p" , "questoes": [
+    {
+      "pergunta-1": "Separa os comodos de uma casa",
+      "resposta-1": "Parede"
+    },
+    {
+      "pergunta-2": "Onde se põe o alimento:",
+      "resposta-2": "Prato"
+    }
+  ]},
 
-    {"q": [
-      {
-        "pergunta-1": "",
-        "resposta-1": ""
-      },
-      {
-        "pergunta-2": "",
-        "resposta-2": ""
-      }
-    ]},
+  {"letra": "q" , "questoes": [
+    {
+      "pergunta-1": "Parte do navio que vai da popa a proa, onde se fixam as partes curvas:",
+      "resposta-1": "Quilha"
+    },
+    {
+      "pergunta-2": "Que possui muito calor:",
+      "resposta-2": "Quente"
+    }
+  ]},
 
-    {"r": [
-      {
-        "pergunta-1": "",
-        "resposta-1": ""
-      },
-      {
-        "pergunta-2": "",
-        "resposta-2": ""
-      }
-    ]},
+  {"letra": "r" , "questoes": [
+    {
+      "pergunta-1": "Foge do gato:",
+      "resposta-1": "Rato"
+    },
+    {
+      "pergunta-2": "Variedade do couve, pode ser verde ou roxa:",
+      "resposta-2": "Repolho"
+    }
+  ]},
 
-    {"s": [
-      {
-        "pergunta-1": "",
-        "resposta-1": ""
-      },
-      {
-        "pergunta-2": "",
-        "resposta-2": ""
-      }
-    ]},
+  {"letra": "s" , "questoes": [
+    {
+      "pergunta-1": "Elemento químico largamente usado na eletronica:",
+      "resposta-1": "Silício"
+    },
+    {
+      "pergunta-2": "Líquido que corre pela estrutura das plantas:",
+      "resposta-2": "Seiva"
+    }
+  ]},
 
-    {"t": [
-      {
-        "pergunta-1": "",
-        "resposta-1": ""
-      },
-      {
-        "pergunta-2": "",
-        "resposta-2": ""
-      }
-    ]},
+  {"letra": "t" , "questoes": [
+    {
+      "pergunta-1": "Assento elevado onde se senta o soberano:",
+      "resposta-1": "Trono"
+    },
+    {
+      "pergunta-2": "Transporte ferroviário:",
+      "resposta-2": "Trem"
+    }
+  ]},
 
-    {"u": [
-      {
-        "pergunta-1": "",
-        "resposta-1": ""
-      },
-      {
-        "pergunta-2": "",
-        "resposta-2": ""
-      }
-    ]},
+  {"letra": "u" , "questoes": [
+    {
+      "pergunta-1": "Molhado, impregnado com água",
+      "resposta-1": "Úmido"
+    },
+    {
+      "pergunta-2": "Fruta usada no vinho:",
+      "resposta-2": "Uva"
+    }
+  ]},
 
-    {"v": [
-      {
-        "pergunta-1": "",
-        "resposta-1": ""
-      },
-      {
-        "pergunta-2": "",
-        "resposta-2": ""
-      }
-    ]},
+  {"letra": "v" , "questoes": [
+    {
+      "pergunta-1": "Cor da maior parte das folhas:",
+      "resposta-1": "Verde"
+    },
+    {
+      "pergunta-2": "Antigo, com muitos anos:",
+      "resposta-2": "Velho"
+    }
+  ]},
 
-    {"w": [
-      {
-        "pergunta-1": "",
-        "resposta-1": ""
-      },
-      {
-        "pergunta-2": "",
-        "resposta-2": ""
-      }
-    ]},
+  {"letra": "w" , "questoes": [
+    {
+      "pergunta-1": "Destilado de grãos, típico da Escócia",
+      "resposta-1": "Whisky"
+    },
+    {
+      "pergunta-2": "Criatura da mitologia indígena que só pode comer carne, formada a partir de um humano que passou muita fome:",
+      "resposta-2": "Wendigo"
+    }
+  ]},
 
-    {"x": [
-      {
-        "pergunta-1": "",
-        "resposta-1": ""
-      },
-      {
-        "pergunta-2": "",
-        "resposta-2": ""
-      }
-    ]},
+  {"letra": "x" , "questoes": [
+    {
+      "pergunta-1": "Jogo de estratégia que ocorre em um tabuleiro preto e branco:",
+      "resposta-1": "Xadrez"
+    },
+    {
+      "pergunta-2": "Louça normalmente usada para tomar chá ou café:",
+      "resposta-2": "Xícara"
+    }
+  ]},
 
-    {"y": [
-      {
-        "pergunta-1": "",
-        "resposta-1": ""
-      },
-      {
-        "pergunta-2": "",
-        "resposta-2": ""
-      }
-    ]},
+  {"letra": "y" , "questoes": [
+    {
+      "pergunta-1": "Personagem de Star Wars, que guia Luke pela força:",
+      "resposta-1": "Yoda"
+    },
+    {
+      "pergunta-2": "Filosofia originaria da Índia, de práticas físicas e meditativas:",
+      "resposta-2": "Yoga"
+    }
+  ]},
 
-    {"z": [
-      {
-        "pergunta-1": "",
-        "resposta-1": ""
-      },
-      {
-        "pergunta-2": "",
-        "resposta-2": ""
-      }
-    ]}
+  {"letra": "z" , "questoes": [
+    {
+      "pergunta-1": "Raivoso, bravo, encolerizado:",
+      "resposta-1": "Zangado"
+    },
+    {
+      "pergunta-2": "Único número que possui valor nulo:",
+      "resposta-2": "Zero"
+    }
+  ]}
 ]}
