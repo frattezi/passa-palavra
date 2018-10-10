@@ -14,3 +14,20 @@ function createCircles(){
   }
 }
 createCircles();
+
+function colorirCircle(var i){
+// se a pergunta respondida estiver certa
+  if (true ){
+    document.getElementById("circle-"+String.fromCharCode(i)).classList.add("btn-success");
+
+  }else if (true){
+// se for passa a palavra
+    document.getElementById("circle-"+String.fromCharCode(i)).classList.add("btn-warning");
+  }else {
+// se errar
+    document.getElementById("circle-"+String.fromCharCode(i)).classList.add("btn-danger");
+  }
+}
+
+
+colorirCircle();
