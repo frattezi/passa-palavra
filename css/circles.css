@@ -1,0 +1,37 @@
+/**
+ * Position icons into circle (SO)
+ * http://stackoverflow.com/q/12813573/1397351
+ */
+.circle-container {
+	position: relative;
+width: 28em;
+height: 28em;
+padding: 2.8em; /*= 2em * 1.4 (2em = half the width of an img, 1.4 = sqrt(2))*/
+
+margin: 1.75em auto 0;
+
+}
+.circle-container img {
+	display: block;
+	overflow: hidden;
+	position: absolute;
+	top: 50%; left: 50%;
+	width: auto; height: auto;
+	margin: -128px; /* 2em = 4em/2 */ /* half the width */
+}
+
+.circle-container div {
+	display: block;
+	overflow: hidden;
+	position: absolute;
+	top: 50%; left: 50%;
+	width: 2em; height: 2em;
+	margin: -1em; /* 2em = 4em/2 */ /* half the width */
+}
+
+.alfabeto{
+	border-style: solid;
+	border-width: 1px;
+	border-color: lightgrey;
+
+}
