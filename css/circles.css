@@ -4,10 +4,12 @@
  */
 .circle-container {
 	position: relative;
-width: 28em;
-height: 28em;
+width: 19em;
+height: 19em;
 padding: 2.8em; /*= 2em * 1.4 (2em = half the width of an img, 1.4 = sqrt(2))*/
 
+/* border: dashed 1px;
+border-radius: 50%; */
 margin: 1.75em auto 0;
 
 }

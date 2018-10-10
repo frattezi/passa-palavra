@@ -9,7 +9,7 @@ function createCircles(){
     circle.className = "alfabeto rounded-circle text-center";
     circle.id = "circleAlfabeto"+i;
     circle.innerHTML = String.fromCharCode(i);
-    circle.style.transform = "rotate("+ r +"deg) translate(12em) rotate("+ -r +"deg)";
+    circle.style.transform = "rotate("+ r +"deg) translate(9.5em) rotate("+ -r +"deg)";
     r += (360/26);
     document.getElementById('circle-container').appendChild(circle);
   }
