@@ -5,9 +5,8 @@ function createCircles(){
   document.getElementById('circle-container').appendChild(m);
   for (var i = 65; i < 91; i++) {
     var circle = document.createElement('div');
-    circle.id = String.fromCharCode(i);
     circle.className = "alfabeto rounded-circle text-center";
-    circle.id = "circleAlfabeto"+i;
+    circle.id = "circle-"+i;
     circle.innerHTML = String.fromCharCode(i);
     circle.style.transform = "rotate("+ r +"deg) translate(9.5em) rotate("+ -r +"deg)";
     r += (360/26);
@@ -15,3 +14,8 @@ function createCircles(){
   }
 }
 createCircles();
+
+
+function colorirCircle{
+
+}
