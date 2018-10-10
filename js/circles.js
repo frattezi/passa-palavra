@@ -15,7 +15,7 @@ function createCircles(){
 }
 createCircles();
 
-function colorirCircle(var i){
+function colorirCircle(i){
 // se a pergunta respondida estiver certa
   if (true ){
     document.getElementById("circle-"+String.fromCharCode(i)).classList.add("btn-success");
