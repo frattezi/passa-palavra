@@ -1,4 +1,7 @@
-﻿//US04 - Mosta a quantidade de acertos
+﻿//GlOBALS
+var CONT = 0;
+
+//US04 - Mosta a quantidade de acertos
 function ContagemPontos(acertos) {
     var contagem = document.getElementById('contagem');
     if (acertos == 1) {
@@ -21,7 +24,6 @@ function NovoJogo() {
 
 //US01
 //Resgata o valor do contador
-cont = sessionStorage.getItem("cont");
 //i é o numero da letra, 0=a
 function LerPergunta(i) {
     function getRandomInt(min, max) {
