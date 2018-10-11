@@ -26,16 +26,20 @@
     <!-- Custom styles for this template -->
     <link href="../css/freelancer.css" rel="stylesheet">
 
+    <!-- Javascript interno -->
+    <script src="../js/script.js"></script>
+    <script src="../json/questoes.js"></script>
+
   </head>
 
-  <body>
+  <body onload="LerPergunta(cont)">
 
 
 
     <!-- Header -->
     <header class="mt-3 bg-primary text-center">
       <div class="container-fluid col-lg-6 col-md-10 col-sm-12">
-        <h1 class="mb-5 ">Fruta amarela com coroa de espinhos</h1>
+        <h1 class="mb-5" id="question">Pergunta</h1>
         <div class='circle-container' id="circle-container"></div>
         <form class="mb-3 mt-5" action="index.html" method="post">
               <input type="text" class="rounded col-lg-8 col-md-8 col-sm-6" placeholder=" Digite aqui sua resposta!">
@@ -44,7 +48,6 @@
         <button class="btn btn-secondary col-lg-4 col-md-4 col-sm-3">Passa Palavra!</button>
       </div>
     </header>
-
 
 
     <!-- Bootstrap core JavaScript -->
