@@ -30,8 +30,6 @@ function LerPergunta(i) {
 function PassouAPalavra(){
     colorirCircle(3);
     PASS_COUNT++;
-    sessionStorage.setItem("PASS", PASS_COUNT);
-    PASS_COUNT = sessionStorage.getItem("PASS");
     LETTER_COUNT++;
     if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
         FinalizaJogo(26);
@@ -58,9 +56,9 @@ function colorirCircle(i) {
        
 }
 
-
-function contador(i) {
-    document.getElementById("respostaFinal").innerHTML = "Voce acertou "+HIT_COUNT+" perguntas!";
+function contador() {
+    HIT_COUNT = sessionStorage.getItem('HIT');
+    document.getElementById("respostaFinal").innerHTML = "Voce acertou " + HIT_COUNT + " perguntas!";
 }
 
 //resets all global variables and go to game screen
@@ -92,7 +90,6 @@ function ConfereResposta(i) {
             colorirCircle(1);
             HIT_COUNT++;
             sessionStorage.setItem("HIT", HIT_COUNT);
-            HIT_COUNT = sessionStorage.getItem("HIT");
             LETTER_COUNT++;
             if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
                 FinalizaJogo(26);
@@ -105,8 +102,6 @@ function ConfereResposta(i) {
         else {
             colorirCircle(2);
             ERROR_COUNT++;
-            sessionStorage.setItem("ERROR", ERROR_COUNT);
-            ERROR_COUNT = sessionStorage.getItem("ERROR");
             LETTER_COUNT++;
             if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
                 FinalizaJogo(26);
@@ -158,5 +153,6 @@ function FinalizaJogo(i) {
     }
     if (i >= 27) {
         location.href = "tela_final.html";
+        contador();
     }
 }
