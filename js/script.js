@@ -17,10 +17,6 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-//US01
-//Resgata o valor do contador
-cont = sessionStorage.getItem("cont");
-
 //i é o numero da letra, 0=a
 function LerPergunta(i) {
     LAST_RANDOM_NUMBER = getRandomInt(0, 1);
@@ -53,46 +49,49 @@ function colorirCircle(i){
 }
 
 
-    n = getRandomInt(0, 1);
-
-    var pergunta = DB.dados[i].questoes[n].pergunta;
-    document.getElementById('question').innerHTML = pergunta;
-    return pergunta;
-
 function contador(i) {
     document.getElementById("respostaFinal").innerHTML = "Voce acertou "+HIT_COUNT+" perguntas!";
 }
 
 //resets all global variables and go to game screen
-function resetGame(where_from){
+function resetGame(where_from) {
     LETTER_COUNT = 0;
     ERROR_COUNT = 0;
     HIT_COUNT = 0;
-    if (where_from == "index"){
+    if (where_from == "index") {
         location.replace("./views/tela_jogo.html")
     }
-    else{
+    else {
         location.replace("../views/tela_jogo.html")
     }
 }
 
 //Confere o valor no Form=form-resposta com o .resposta no JSON
 function ConfereResposta(i) {
-    var Fres = document.getElementById('form-resposta').elements[0].value;
-    var JSres = DB.dados[i].questoes[n].resposta;
+    var Fres = document.getElementById('form-resposta').Fresposta.value;
+    var JSres = DB.dados[i].questoes[LAST_RANDOM_NUMBER].resposta;
+
+    document.getElementById('form-resposta').Fresposta.value = '';
 
     Fres = TratamentoString(Fres);
     JSres = TratamentoString(JSres);
 
     //Resposta correta
     if (Fres == JSres) {
-
+        colorirCircle(1)
+        HIT_COUNT++;
+        sessionStorage.setItem(HIT, HIT_COUNT);
+        LETTER_COUNT++;
+        LerPergunta(LETTER_COUNT);
     }
     //Resposta incorreta
     else {
-
+        colorirCircle(2)
+        ERROR_COUNT++;
+        sessionStorage.setItem(ERROR, ERROR_COUNT);
+        LETTER_COUNT++;
+        LerPergunta(LETTER_COUNT);
     }
-
 }
 
 //Tratamento da string
@@ -126,21 +125,3 @@ function TratamentoString(str) {
     str = str.replace(/[Z]/g, "z");
     return str;
 }
-
-    var JSres = DB.dados[i].questoes[LAST_RANDOM_NUMBER].resposta;
-    
-    //Resposta correta
-    if (Fres == JSres) {
-        colorirCircle(1)
-        HIT_COUNT++;
-        LETTER_COUNT++;
-        LerPergunta(LETTER_COUNT);
-    }
-    //Resposta incorreta
-    else {
-        colorirCircle(2)
-        ERROR_COUNT++;
-        LETTER_COUNT++;
-        LerPergunta(LETTER_COUNT);
-    }
- }

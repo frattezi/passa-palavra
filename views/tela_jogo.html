@@ -40,19 +40,12 @@
       <div class="container-fluid col-lg-6 col-md-10 col-sm-12">
         <h1 class="mb-5" id="question">Pergunta</h1>
         <div class='circle-container' id="circle-container"></div>
-        <form class="mb-3 mt-5"id="form-resposta" action="JavaScript:ConfereResposta(cont)" method="post">
-              <input class="rounded col-lg-8 col-md-8 col-sm-6" type="text" name="Fresposta" placeholder=" Digite aqui sua resposta!">
-        </form>
-        <button class="btn btn-primary col-lg-4 col-md-4 col-sm-3" form="form-resposta">Responder</button>
-        <button class="btn btn-secondary col-lg-4 col-md-4 col-sm-3">Passa Palavra!</button>
-        
         <form class="mb-3 mt-5"id="form-resposta" action="JavaScript:ConfereResposta(LETTER_COUNT)" method="post">
           <input class="rounded col-lg-8 col-md-8 col-sm-6" type="text" name="Fresposta" placeholder=" Digite aqui sua resposta!">
         </form>
         
         <button class="btn btn-primary col-lg-4 col-md-4 col-sm-3" form="form-resposta">Responder</button>
-        
-        <button onclick="PassouAPalavra()" class="btn btn-secondary col-lg-4 col-md-4 col-sm-3">Passa Palavra!</button>
+        <button class="btn btn-secondary col-lg-4 col-md-4 col-sm-3" onclick="PassouAPalavra()">Passa Palavra!</button>
       
       </div>
     </header>
