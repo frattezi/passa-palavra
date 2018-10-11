@@ -5,6 +5,7 @@ var LETTER_COUNT = 0;
 var ERROR_COUNT = 0;
 //Conta numero de acertos
 var HIT_COUNT = 0;
+
 //Salva ultimo numero random
 var LAST_RANDOM_NUMBER = 0;
 
@@ -21,10 +22,15 @@ function getRandomInt(min, max) {
 //Resgata o valor do contador
 //i é o numero da letra, 0=a
 function LerPergunta(i) {
+    if ( LETTER_COUNT < 26 ){
+
     LAST_RANDOM_NUMBER = getRandomInt(0, 1);
     var pergunta = DB.dados[i].questoes[LAST_RANDOM_NUMBER].pergunta;
     document.getElementById('question').innerHTML = pergunta;
     return pergunta;
+  }else {
+    location.replace("./tela_final.html")
+  }
 }
 
 function PassouAPalavra(){
@@ -50,8 +56,9 @@ function colorirCircle(i){
     document.getElementById("form-resposta").reset();
 }
 
-function contador(i) {
-    document.getElementById("respostaFinal").innerHTML = "Voce acertou "+HIT_COUNT+" perguntas!";
+function contador() {
+
+    document.getElementById("respostaFinal").innerHTML = "Voce acertou "+localStorage.getItem("num_acertos")+" perguntas!";
 }
 
 //resets all global variables and go to game screen
@@ -59,6 +66,7 @@ function resetGame(where_from){
     LETTER_COUNT = 0;
     ERROR_COUNT = 0;
     HIT_COUNT = 0;
+    localStorage.setItem("num_acertos", HIT_COUNT);
     if (where_from == "index"){
         location.replace("./views/tela_jogo.html")
     }
@@ -66,6 +74,8 @@ function resetGame(where_from){
         location.replace("../views/tela_jogo.html")
     }
 }
+
+
 
 //Confere o valor no Form=form-resposta com o .resposta no JSON
 function ConfereResposta(i) {
@@ -76,6 +86,7 @@ function ConfereResposta(i) {
     if (Fres.toLowerCase() == JSres.toLowerCase() ) {
         colorirCircle(1)
         HIT_COUNT++;
+        localStorage.setItem("num_acertos", HIT_COUNT);
         LETTER_COUNT++;
         LerPergunta(LETTER_COUNT);
     }
