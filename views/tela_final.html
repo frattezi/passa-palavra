@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 
-<head>
+  <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,14 +20,14 @@
 
     <!-- Plugin CSS -->
     <link href="../vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
-
+    
+    <!-- Javascript interno -->
+    <script src="../js/script.js"></script>
+    
     <!-- Custom styles for this template -->
     <link href="../css/freelancer.css" rel="stylesheet">
 
-    <!-- Javascript interno -->
-    <script src="../js/script.js"></script>
-
-</head>
+  </head>
 
   <body onload="ContagemPontos(1)">
 
@@ -37,12 +37,13 @@
     <header class="mt-5 bg-primary text-center">
       <div class="container-fluid col-lg-6 col-md-10 col-sm-12">
         <h1 class="mb-5 ">Fim de jogo</h1>
-        <h1 class="mb-5 " id="contagem">Você acertou ? perguntas!</h1>
-        <button class="btn btn-primary btn-lg col-lg-4 col-md-4 col-sm-3" onclick="NovoJogo()">Jogar Novamente</button>
+        <h1 class="mb-5 " id="respostaFinal"></h1>
+        <button class="btn btn-primary btn-lg col-lg-4 col-md-4 col-sm-3">Jogar Novamente</button>
         </p>
-        <button class="btn btn-danger btn-lg col-lg-4 col-md-4 col-sm-3" onclick="MenuPrincipal()">Menu Principal</button>
+        <button class="btn btn-danger btn-lg col-lg-4 col-md-4 col-sm-3">Menu Principal</button>
       </div>
     </header>
+
 
 
     <!-- Bootstrap core JavaScript -->
@@ -60,6 +61,8 @@
     <!-- Custom scripts for this template -->
     <script src="../js/freelancer.min.js"></script>
 
+    <!--Contador de respostas -->
+    <script src="../js/contador.js"></script>
   </body>
 
 </html>
