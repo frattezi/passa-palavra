@@ -35,18 +35,55 @@ function LerPergunta(i) {
     document.getElementById('question').innerHTML = pergunta;
     return pergunta;
 }
+
 //Confere o valor no Form=form-resposta com o .resposta no JSON
 function ConfereResposta(i) {
     var Fres = document.getElementById('form-resposta').elements[0].value;
     var JSres = DB.dados[i].questoes[n].resposta;
+
+    Fres = TratamentoString(Fres);
+    JSres = TratamentoString(JSres);
+
     //Resposta correta
     if (Fres == JSres) {
-        
+
     }
     //Resposta incorreta
     else {
-        
+
     }
 
+}
+
+//Tratamento da string
+function TratamentoString(str) {
+    str = str.replace(/ /g, "");
+    str = str.replace(/[AÁÀÂÃÄáàâãä]/g, "a");
+    str = str.replace(/[B]/g, "b");
+    str = str.replace(/[Cç]/g, "c");
+    str = str.replace(/[D]/g, "d");
+    str = str.replace(/[EÉÈÊËéèêë]/g, "e");
+    str = str.replace(/[F]/g, "f");
+    str = str.replace(/[G]/g, "g");
+    str = str.replace(/[H]/g, "h");
+    str = str.replace(/[IÍÌÎÏíìîï]/g, "i");
+    str = str.replace(/[J]/g, "j");
+    str = str.replace(/[K]/g, "k");
+    str = str.replace(/[L]/g, "l");
+    str = str.replace(/[M]/g, "m");
+    str = str.replace(/[N]/g, "n");
+    str = str.replace(/[OÓÒÔÕÖóòôõö]/g, "o");
+    str = str.replace(/[P]/g, "p");
+    str = str.replace(/[Q]/g, "q");
+    str = str.replace(/[R]/g, "r");
+    str = str.replace(/[S]/g, "s");
+    str = str.replace(/[T]/g, "t");
+    str = str.replace(/[UÚÙÛÜúùûü]/g, "u");
+    str = str.replace(/[V]/g, "v");
+    str = str.replace(/[W]/g, "w");
+    str = str.replace(/[X]/g, "x");
+    str = str.replace(/[Y]/g, "y");
+    str = str.replace(/[Z]/g, "z");
+    return str;
 }
 
