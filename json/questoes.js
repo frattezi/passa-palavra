@@ -111,7 +111,7 @@ var DB = {"dados": [
 
   {"letra": "k" , "questoes": [
     {
-      "pergunta": "'Tudo que vai volta:'",
+      "pergunta": "'Tudo que vai volta':",
       "resposta": "Karma"
     },
     {

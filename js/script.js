@@ -5,6 +5,8 @@ var LETTER_COUNT = 0;
 var ERROR_COUNT = 0;
 //Conta numero de acertos
 var HIT_COUNT = 0;
+//Conta os passa-palavra
+var PASS_COUNT = 0;
 //Salva ultimo numero random
 var LAST_RANDOM_NUMBER = 0;
 
@@ -27,11 +29,19 @@ function LerPergunta(i) {
 
 function PassouAPalavra(){
     colorirCircle(3);
+    PASS_COUNT++;
+    sessionStorage.setItem("PASS", PASS_COUNT);
+    PASS_COUNT = sessionStorage.getItem("PASS");
     LETTER_COUNT++;
-    LerPergunta(LETTER_COUNT);
+    if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
+        FinalizaJogo(26);
+    }
+    else {
+        LerPergunta(LETTER_COUNT);
+    }
 }
 
-function colorirCircle(i){
+function colorirCircle(i) {
     // se a pergunta respondida estiver certa
     if (i == 1){
         document.getElementById("circle-"+String.fromCharCode(LETTER_COUNT+65)).classList.add("btn-success");
@@ -55,9 +65,6 @@ function contador(i) {
 
 //resets all global variables and go to game screen
 function resetGame(where_from) {
-    LETTER_COUNT = 0;
-    ERROR_COUNT = 0;
-    HIT_COUNT = 0;
     if (where_from == "index") {
         location.replace("./views/tela_jogo.html")
     }
@@ -68,30 +75,48 @@ function resetGame(where_from) {
 
 //Confere o valor no Form=form-resposta com o .resposta no JSON
 function ConfereResposta(i) {
-    var Fres = document.getElementById('form-resposta').Fresposta.value;
-    var JSres = DB.dados[i].questoes[LAST_RANDOM_NUMBER].resposta;
-
-    document.getElementById('form-resposta').Fresposta.value = '';
-
-    Fres = TratamentoString(Fres);
-    JSres = TratamentoString(JSres);
-
-    //Resposta correta
-    if (Fres == JSres) {
-        colorirCircle(1)
-        HIT_COUNT++;
-        sessionStorage.setItem(HIT, HIT_COUNT);
-        LETTER_COUNT++;
-        LerPergunta(LETTER_COUNT);
+    if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
+        FinalizaJogo(27);
     }
-    //Resposta incorreta
     else {
-        colorirCircle(2)
-        ERROR_COUNT++;
-        sessionStorage.setItem(ERROR, ERROR_COUNT);
-        LETTER_COUNT++;
-        LerPergunta(LETTER_COUNT);
+        var Fres = document.getElementById('form-resposta').Fresposta.value;
+        var JSres = DB.dados[i].questoes[LAST_RANDOM_NUMBER].resposta;
+
+        document.getElementById('form-resposta').Fresposta.value = '';
+
+        Fres = TratamentoString(Fres);
+        JSres = TratamentoString(JSres);
+
+        //Resposta correta
+        if (Fres == JSres) {
+            colorirCircle(1);
+            HIT_COUNT++;
+            sessionStorage.setItem("HIT", HIT_COUNT);
+            HIT_COUNT = sessionStorage.getItem("HIT");
+            LETTER_COUNT++;
+            if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
+                FinalizaJogo(26);
+            }
+            else {
+                LerPergunta(LETTER_COUNT);
+            }
+        }
+        //Resposta incorreta
+        else {
+            colorirCircle(2);
+            ERROR_COUNT++;
+            sessionStorage.setItem("ERROR", ERROR_COUNT);
+            ERROR_COUNT = sessionStorage.getItem("ERROR");
+            LETTER_COUNT++;
+            if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
+                FinalizaJogo(26);
+            }
+            else {
+                LerPergunta(LETTER_COUNT);
+            }
+        }
     }
+    
 }
 
 //Tratamento da string
@@ -124,4 +149,14 @@ function TratamentoString(str) {
     str = str.replace(/[Y]/g, "y");
     str = str.replace(/[Z]/g, "z");
     return str;
+}
+
+//Finaliza o jogo
+function FinalizaJogo(i) {
+    if (i >= 26) {
+        document.getElementById('button-res').innerHTML = 'Finalizar Jogo';
+    }
+    if (i >= 27) {
+        location.href = "tela_final.html";
+    }
 }
