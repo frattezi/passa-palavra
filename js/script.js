@@ -63,6 +63,7 @@ function contador() {
 
 //resets all global variables and go to game screen
 function resetGame(where_from) {
+    sessionStorage.setItem('HIT', '0');
     if (where_from == "index") {
         location.replace("./views/tela_jogo.html")
     }
@@ -86,7 +87,10 @@ function ConfereResposta(i) {
         JSres = TratamentoString(JSres);
 
         //Resposta correta
-        if (Fres == JSres) {
+        if(Fres == ''){
+            PassouAPalavra();
+        }
+        else if (Fres == JSres) {
             colorirCircle(1);
             HIT_COUNT++;
             sessionStorage.setItem("HIT", HIT_COUNT);
