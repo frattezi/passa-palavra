@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Registro</title>
+
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+  </head>
+
+  <body class="bg-dark">
+
+    <div class="container">
+      <div class="card card-register mx-auto mt-5">
+        <div class="card-header">Registro de Perguntas e Respostas</div>
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <div class="form-row">
+                <div class="col-md-6">
+                  <div class="form-label-group">
+                    <input type="text" id="firstName" class="form-control" placeholder="First name" required="required" autofocus="autofocus">
+                    <label for="firstName">Tema</label>
+                  </div>
+                </div>
+                <div class="form-label-group">
+                  <select class="btn btn-primary btn-block">
+                    <option>Letra</option>
+                    <option>A</option>
+                    <option>B</option>
+                    <option>C</option>
+                    <option>D</option>
+                    <option>E</option>
+                    <option>F</option>
+                    <option>G</option>
+                    <option>H</option>
+                    <option>I</option>
+                    <option>J</option>
+                    <option>K</option>
+                    <option>L</option>
+                    <option>M</option>
+                    <option>N</option>
+                    <option>O</option>
+                    <option>P</option>
+                    <option>Q</option>
+                    <option>R</option>
+                    <option>S</option>
+                    <option>T</option>
+                    <option>U</option>
+                    <option>V</option>
+                    <option>W</option>
+                    <option>X</option>
+                    <option>Y</option>
+                    <option>Z</option>
+                  </select>
+
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-label-group">
+                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required">
+                <label for="inputEmail">Pergunta</label>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <div class="form-label-group">
+                <input type="tel" id="inputResp" class="form-control" placeholder="Email address" required="required">
+                <label for="inputResp">Resposta</label>
+              </div>
+            </div>
+            <div class="botao1">
+            <button class="btn btn-success btn-block">Incluir Registro</button>
+            </div>
+            <div class="botao2">
+            <button class="btn btn-danger btn-block">Excluir Registro</button>
+            </div>
+            <div class="botao3">
+            <button type="button" class="btn btn-primary btn-block" onClick="mostQuestoes();">Salvar</button>
+            <div id="questoes">
+              <br><h2 class="col-md-6">Quetionário</h2>
+              <div id="questionario" class="card-body"></div>
+              <div class="botao1">
+                <button class="btn btn-primary btn-block">Finalizar Registro</button>
+                </div>
+                <div class="botao2">
+                <button class="btn btn-primary btn-block">Jogar</button>
+                </div>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+
+  </body>
+
+</html>
