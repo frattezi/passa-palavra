@@ -1,4 +1,6 @@
 ﻿//GlOBALS
+//Salva qual tema está
+var TEMA_ATUAL = 0;
 //Conta em qual letra esta
 var LETTER_COUNT = 0;
 //Conta o numero de erros
@@ -22,13 +24,12 @@ function getRandomInt(min, max) {
 //i é o numero da letra, 0=a
 function LerPergunta(i) {
     if ( LETTER_COUNT < 26 ){
-
-    LAST_RANDOM_NUMBER = getRandomInt(0, 1);
-    var pergunta = DB.dados[i].questoes[LAST_RANDOM_NUMBER].pergunta;
-    document.getElementById('question').innerHTML = pergunta;
-    return pergunta;
-  }else {
-    location.replace("./tela_final.html")
+      LAST_RANDOM_NUMBER = getRandomInt(0, 1);
+      var pergunta = DB.temas[TEMA_ATUAL].dados[i].questoes[LAST_RANDOM_NUMBER].pergunta;
+      document.getElementById('question').innerHTML = pergunta;
+      return pergunta;
+    }else {
+      location.replace("./tela_final.html")
   }
 }
 
@@ -69,10 +70,17 @@ function contador() {
 //resets all global variables and go to game screen
 function resetGame() {
     sessionStorage.setItem('HIT', '0');
-    location="views/tela_jogo.html";
+  
+    if (where_from == "index") {
+        location.replace("./views/tela_temas.html")
+    }
+    else if (where_from == "menu") {
+        location.replace("../views/tela_jogo.html")
+    }
+    else {
+        location.replace("../views/tela_jogo.html")
+    }
 }
-
-
 
 //Confere o valor no Form=form-resposta com o .resposta no JSON
 function ConfereResposta(i) {
@@ -81,7 +89,7 @@ function ConfereResposta(i) {
     }
     else {
         var Fres = document.getElementById('form-resposta').Fresposta.value;
-        var JSres = DB.dados[i].questoes[LAST_RANDOM_NUMBER].resposta;
+        var JSres = DB.temas[TEMA_ATUAL].dados[i].questoes[LAST_RANDOM_NUMBER].resposta;
 
         document.getElementById('form-resposta').Fresposta.value = '';
 
@@ -117,7 +125,6 @@ function ConfereResposta(i) {
             }
         }
     }
-
 }
 
 //Tratamento da string
@@ -125,7 +132,7 @@ function TratamentoString(str) {
     str = str.replace(/ /g, "");
     str = str.replace(/[AÁÀÂÃÄáàâãä]/g, "a");
     str = str.replace(/[B]/g, "b");
-    str = str.replace(/[Cç]/g, "c");
+    str = str.replace(/[CÇç]/g, "c");
     str = str.replace(/[D]/g, "d");
     str = str.replace(/[EÉÈÊËéèêë]/g, "e");
     str = str.replace(/[F]/g, "f");
