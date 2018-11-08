@@ -168,16 +168,25 @@ function mudarTela(destino) {
 }
 
 //Em construsção
-function formularioJson() {/*
-    var formulario = new Object();
-formulario.firstname = "Jesper";
-formulario.surname = "Aaberg";
-formulario.phone = ["555-0100", "555-0120"];
+var cont = 0;
+function formularioJson() {
+    var letra = document.getElementById('campo-letra').value;
+    var tema = document.getElementById('campo-tema').value;
+    var pergunta = document.getElementById('campo-pergunta').value;
+    var resposta = document.getElementById('campo-resposta').value;
+    var questao = `<input type="checkbox" id="test-${cont}" value=1> Tema: ${tema} - Letra: ${letra} - Pergunta: ${pergunta} - Resposta: ${resposta}<br>`;
+    document.getElementById('campo-questoes').innerHTML += questao;
+    
+    var DB = new Object();
+    DB.tema = tema;
+    DB.dados = new Array();
+    DB.dados[0].letra = letra;
+    DB.dados[0].questoes = new Array;
+    DB.dados[0].questoes[0].pergunta = pergunta;
+    DB.dados[0].questoes[0].resposta = resposta;
+    var textJSON = JSON.stringify(DB);
+    document.write(textJSON);
+    document.getElementById('campo-questoes').innerHTML = textJSON;
 
-var memberfilter = new Array();
-memberfilter[0] = "surname";
-memberfilter[1] = "phone";
-var jsonText = JSON.stringify(formulario, memberfilter, "\t");
-document.write(jsonText);
-    document.getElementById('campo-questoes').innerHTML = formulario;*/
+    cont++;
 }
