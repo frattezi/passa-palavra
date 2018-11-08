@@ -1,16 +1,18 @@
 ﻿//GlOBALS
 //Salva qual tema está
-var TEMA_ATUAL = 0;
+let TEMA_ATUAL = null;
 //Conta em qual letra esta
-var LETTER_COUNT = 0;
+let LETTER_COUNT = 0;
 //Conta o numero de erros
-var ERROR_COUNT = 0;
+let ERROR_COUNT = 0;
 //Conta numero de acertos
-var HIT_COUNT = 0;
+let HIT_COUNT = 0;
 //Conta os passa-palavra
-var PASS_COUNT = 0;
+let PASS_COUNT = 0;
 //Salva ultimo numero random
-var LAST_RANDOM_NUMBER = 0;
+let LAST_RANDOM_NUMBER = 0;
+
+const ALFABETO = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 
 //US04 - Vai para o menu principal
 function MenuPrincipal() {
@@ -24,10 +26,11 @@ function getRandomInt(min, max) {
 //i é o numero da letra, 0=a
 function LerPergunta(i) {
     if ( LETTER_COUNT < 26 ){
-      LAST_RANDOM_NUMBER = getRandomInt(0, 1);
-      var pergunta = DB.temas[TEMA_ATUAL].dados[i].questoes[LAST_RANDOM_NUMBER].pergunta;
-      document.getElementById('question').innerHTML = pergunta;
-      return pergunta;
+        TEMA_ATUAL = sessionStorage.getItem('TEMA_ATUAL')
+        LAST_RANDOM_NUMBER = getRandomInt(0, 1);
+        var pergunta = DB[TEMA_ATUAL][i][LAST_RANDOM_NUMBER].pergunta;
+        document.getElementById('question').innerHTML = pergunta;
+        return pergunta;
     }else {
       location.replace("./tela_final.html")
   }
@@ -68,13 +71,20 @@ function contador() {
 }
 
 //resets all global variables and go to game screen
-function resetGame() {
+function resetGame(where_from, tema) {
     sessionStorage.setItem('HIT', '0');
-  
     if (where_from == "index") {
         location.replace("./views/tela_temas.html")
     }
     else if (where_from == "menu") {
+        location.replace("./tela_jogo.html")
+    
+    }
+    else if (where_from == "criar") {
+        location.replace("../views/tela_criar_temas.html")
+    }
+    else if (where_from == "themeSelection") {
+        sessionStorage.setItem('TEMA_ATUAL', tema);
         location.replace("../views/tela_jogo.html")
     }
     else {
@@ -89,7 +99,7 @@ function ConfereResposta(i) {
     }
     else {
         var Fres = document.getElementById('form-resposta').Fresposta.value;
-        var JSres = DB.temas[TEMA_ATUAL].dados[i].questoes[LAST_RANDOM_NUMBER].resposta;
+        var JSres = DB[TEMA_ATUAL][i][LAST_RANDOM_NUMBER].resposta;
 
         document.getElementById('form-resposta').Fresposta.value = '';
 
