@@ -21,18 +21,18 @@ function getRandomInt(min, max) {
 
 //i é o numero da letra, 0=a
 function LerPergunta(i) {
-    if ( LETTER_COUNT < 26 ){
+    if (LETTER_COUNT < 26) {
 
-    LAST_RANDOM_NUMBER = getRandomInt(0, 1);
-    var pergunta = DB.dados[i].questoes[LAST_RANDOM_NUMBER].pergunta;
-    document.getElementById('question').innerHTML = pergunta;
-    return pergunta;
-  }else {
-    location.replace("./tela_final.html")
-  }
+        LAST_RANDOM_NUMBER = getRandomInt(0, 1);
+        var pergunta = DB.dados[i].questoes[LAST_RANDOM_NUMBER].pergunta;
+        document.getElementById('question').innerHTML = pergunta;
+        return pergunta;
+    } else {
+        location.replace("./tela_final.html")
+    }
 }
 
-function PassouAPalavra(){
+function PassouAPalavra() {
     colorirCircle(3);
     PASS_COUNT++;
     LETTER_COUNT++;
@@ -46,17 +46,17 @@ function PassouAPalavra(){
 
 function colorirCircle(i) {
     // se a pergunta respondida estiver certa
-    if (i == 1){
-        document.getElementById("circle-"+String.fromCharCode(LETTER_COUNT+65)).classList.add("btn-success");
+    if (i == 1) {
+        document.getElementById("circle-" + String.fromCharCode(LETTER_COUNT + 65)).classList.add("btn-success");
 
-    // se errar
-    }if(i == 2){
-        document.getElementById("circle-"+String.fromCharCode(LETTER_COUNT+65)).classList.add("btn-danger");
+        // se errar
+    } if (i == 2) {
+        document.getElementById("circle-" + String.fromCharCode(LETTER_COUNT + 65)).classList.add("btn-danger");
     }
 
     // se for passa a palavra
-    if (i == 3){
-        document.getElementById("circle-"+String.fromCharCode(LETTER_COUNT+65)).classList.add("btn-warning");
+    if (i == 3) {
+        document.getElementById("circle-" + String.fromCharCode(LETTER_COUNT + 65)).classList.add("btn-warning");
     }
     document.getElementById("form-resposta").reset();
 }
@@ -69,7 +69,7 @@ function contador() {
 //resets all global variables and go to game screen
 function resetGame() {
     sessionStorage.setItem('HIT', '0');
-    location="views/tela_jogo.html";
+    location = "views/tela_jogo.html";
 }
 
 
@@ -89,7 +89,7 @@ function ConfereResposta(i) {
         JSres = TratamentoString(JSres);
 
         //Resposta correta
-        if(Fres == ''){
+        if (Fres == '') {
             PassouAPalavra();
         }
         else if (Fres == JSres) {
@@ -161,4 +161,23 @@ function FinalizaJogo(i) {
         location.href = "tela_final.html";
         contador();
     }
+}
+
+function mudarTela(destino) {
+    location = destino;
+}
+
+//Em construsção
+function formularioJson() {/*
+    var formulario = new Object();
+formulario.firstname = "Jesper";
+formulario.surname = "Aaberg";
+formulario.phone = ["555-0100", "555-0120"];
+
+var memberfilter = new Array();
+memberfilter[0] = "surname";
+memberfilter[1] = "phone";
+var jsonText = JSON.stringify(formulario, memberfilter, "\t");
+document.write(jsonText);
+    document.getElementById('campo-questoes').innerHTML = formulario;*/
 }

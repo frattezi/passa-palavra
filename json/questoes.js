@@ -1,4 +1,4 @@
-var DB = {"dados": [
+var DB = {"tema": "Padrão" , "dados": [
   {"letra": "a" , "questoes": [
     {
       "pergunta": "Legume usado como enfeite de Halloween:",
