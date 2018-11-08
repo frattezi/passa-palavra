@@ -68,8 +68,9 @@ function contador() {
 }
 
 //resets all global variables and go to game screen
-function resetGame(where_from) {
+function resetGame() {
     sessionStorage.setItem('HIT', '0');
+  
     if (where_from == "index") {
         location.replace("./views/tela_temas.html")
     }
