@@ -36,7 +36,7 @@ function LerPergunta(i) {
   }
 }
 
-function PassouAPalavra(){
+function PassouAPalavra() {
     colorirCircle(3);
     PASS_COUNT++;
     LETTER_COUNT++;
@@ -50,17 +50,17 @@ function PassouAPalavra(){
 
 function colorirCircle(i) {
     // se a pergunta respondida estiver certa
-    if (i == 1){
-        document.getElementById("circle-"+String.fromCharCode(LETTER_COUNT+65)).classList.add("btn-success");
+    if (i == 1) {
+        document.getElementById("circle-" + String.fromCharCode(LETTER_COUNT + 65)).classList.add("btn-success");
 
-    // se errar
-    }if(i == 2){
-        document.getElementById("circle-"+String.fromCharCode(LETTER_COUNT+65)).classList.add("btn-danger");
+        // se errar
+    } if (i == 2) {
+        document.getElementById("circle-" + String.fromCharCode(LETTER_COUNT + 65)).classList.add("btn-danger");
     }
 
     // se for passa a palavra
-    if (i == 3){
-        document.getElementById("circle-"+String.fromCharCode(LETTER_COUNT+65)).classList.add("btn-warning");
+    if (i == 3) {
+        document.getElementById("circle-" + String.fromCharCode(LETTER_COUNT + 65)).classList.add("btn-warning");
     }
     document.getElementById("form-resposta").reset();
 }
@@ -107,7 +107,7 @@ function ConfereResposta(i) {
         JSres = TratamentoString(JSres);
 
         //Resposta correta
-        if(Fres == ''){
+        if (Fres == '') {
             PassouAPalavra();
         }
         else if (Fres == JSres) {
@@ -178,4 +178,32 @@ function FinalizaJogo(i) {
         location.href = "tela_final.html";
         contador();
     }
+}
+
+function mudarTela(destino) {
+    location = destino;
+}
+
+//Em construsção
+var cont = 0;
+function formularioJson() {
+    var letra = document.getElementById('campo-letra').value;
+    var tema = document.getElementById('campo-tema').value;
+    var pergunta = document.getElementById('campo-pergunta').value;
+    var resposta = document.getElementById('campo-resposta').value;
+    var questao = `<input type="checkbox" id="test-${cont}" value=1> Tema: ${tema} - Letra: ${letra} - Pergunta: ${pergunta} - Resposta: ${resposta}<br>`;
+    document.getElementById('campo-questoes').innerHTML += questao;
+    
+    var DB = new Object();
+    DB.tema = tema;
+    DB.dados = new Array();
+    DB.dados[0].letra = letra;
+    DB.dados[0].questoes = new Array;
+    DB.dados[0].questoes[0].pergunta = pergunta;
+    DB.dados[0].questoes[0].resposta = resposta;
+    var textJSON = JSON.stringify(DB);
+    document.write(textJSON);
+    document.getElementById('campo-questoes').innerHTML = textJSON;
+
+    cont++;
 }
