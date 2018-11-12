@@ -2,11 +2,11 @@ var DB = {
   "Variedades": [
     
     [{
-        "pergunta": "Legume usado como enfeite de Halloween v1:",
+        "pergunta": "Legume usado como enfeite de Halloween:",
         "resposta": "Abobora"
       },
       {
-        "pergunta": "Fruta com coroa v1:",
+        "pergunta": "Fruta com coroa:",
         "resposta": "Abacaxi"
       }
     ],
@@ -291,11 +291,11 @@ var DB = {
   "Variedades2":[
     [
       {
-        "pergunta": "Legume usado como enfeite de Halloween v2:",
+        "pergunta": "Legume usado como enfeite de Halloween:",
         "resposta": "Abobora"
       },
       {
-        "pergunta": "Fruta com coroa v2:",
+        "pergunta": "Fruta com coroa:",
         "resposta": "Abacaxi"
       }
     ],
