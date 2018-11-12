@@ -9,7 +9,7 @@ function criarMenuTemas()
       opcao.innerHTML = key;
       opcao.className = "btn btn-info w-25 mt-25";
       opcao.style = "margin: 10px";
-      opcao.setAttribute('onClick', "resetGame('themeSelection', '"+key+"')");
+      opcao.setAttribute('onClick', "router('themeSelection', '"+key+"')");
       console.log(opcao)
       document.getElementById('menu-container').appendChild(opcao);
       iterator += 1

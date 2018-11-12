@@ -14,11 +14,6 @@ let LAST_RANDOM_NUMBER = 0;
 
 const ALFABETO = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 
-//US04 - Vai para o menu principal
-function MenuPrincipal() {
-    location.href = '../index.html';
-}
-
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -48,44 +43,33 @@ function PassouAPalavra() {
     }
 }
 
-function colorirCircle(i) {
-    // se a pergunta respondida estiver certa
-    if (i == 1) {
-        document.getElementById("circle-" + String.fromCharCode(LETTER_COUNT + 65)).classList.add("btn-success");
-
-        // se errar
-    } if (i == 2) {
-        document.getElementById("circle-" + String.fromCharCode(LETTER_COUNT + 65)).classList.add("btn-danger");
-    }
-
-    // se for passa a palavra
-    if (i == 3) {
-        document.getElementById("circle-" + String.fromCharCode(LETTER_COUNT + 65)).classList.add("btn-warning");
-    }
-    document.getElementById("form-resposta").reset();
-}
-
 function contador() {
     HIT_COUNT = sessionStorage.getItem('HIT');
     document.getElementById("respostaFinal").innerHTML = "Voce acertou " + HIT_COUNT + " perguntas!";
 }
 
 //resets all global variables and go to game screen
-function resetGame(where_from, tema) {
+function router(where_from, tema) {
     sessionStorage.setItem('HIT', '0');
     if (where_from == "index") {
+        sessionStorage.setItem('HIT_COUNT', 0);
         location.replace("./views/tela_temas.html")
     }
     else if (where_from == "menu") {
         location.replace("./tela_jogo.html")
-    
     }
-    else if (where_from == "criar") {
-        location.replace("../views/tela_criar_temas.html")
+    else if (where_from == "criarTemas") {
+        location.replace("./tela_criar_temas.html")
+    }
+    else if (where_from == "personalizar") {
+        location.replace("./views/tela_criar_temas.html")
     }
     else if (where_from == "themeSelection") {
         sessionStorage.setItem('TEMA_ATUAL', tema);
         location.replace("../views/tela_jogo.html")
+    }
+    else if (where_from == "tela_final") {
+        location.replace("../index.html")
     }
     else {
         location.replace("../views/tela_jogo.html")
