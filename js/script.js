@@ -25,6 +25,7 @@ function LerPergunta(i) {
         LAST_RANDOM_NUMBER = getRandomInt(0, 1);
         var pergunta = DB[TEMA_ATUAL][i][LAST_RANDOM_NUMBER].pergunta;
         document.getElementById('question').innerHTML = pergunta;
+        document.getElementById("circle-" + String.fromCharCode(LETTER_COUNT + 65)).classList.add("btn-info");
         return pergunta;
     }else {
       location.replace("./tela_final.html")
