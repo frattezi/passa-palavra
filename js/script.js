@@ -25,7 +25,7 @@ function LerPergunta(i) {
         LAST_RANDOM_NUMBER = getRandomInt(0, 1);
         var pergunta = DB[TEMA_ATUAL][i][LAST_RANDOM_NUMBER].pergunta;
         document.getElementById('question').innerHTML = pergunta;
-        document.getElementById("circle-" + String.fromCharCode(LETTER_COUNT + 65)).classList.add("btn-info");
+        LetraFoco(LETTER_COUNT, true);
         return pergunta;
     }else {
       location.replace("./tela_final.html")
@@ -33,6 +33,7 @@ function LerPergunta(i) {
 }
 
 function PassouAPalavra() {
+    LetraFoco(LETTER_COUNT, false);
     colorirCircle(3);
     PASS_COUNT++;
     LETTER_COUNT++;
@@ -49,7 +50,7 @@ function contador() {
     document.getElementById("respostaFinal").innerHTML = "Voce acertou " + HIT_COUNT + " perguntas!";
 }
 
-//resets all global variables and go to game screen
+//Reseta as variaveis globais e redireciona para a tela correspondente ao parametro
 function router(where_from, tema) {
     sessionStorage.setItem('HIT', '0');
     if (where_from == "index") {
@@ -79,10 +80,13 @@ function router(where_from, tema) {
 
 //Confere o valor no Form=form-resposta com o .resposta no JSON
 function ConfereResposta(i) {
+    LetraFoco(LETTER_COUNT, false);
+
     if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
         FinalizaJogo(27);
     }
     else {
+
         var Fres = document.getElementById('form-resposta').Fresposta.value;
         var JSres = DB[TEMA_ATUAL][i][LAST_RANDOM_NUMBER].resposta;
 
@@ -167,6 +171,28 @@ function FinalizaJogo(i) {
 
 function mudarTela(destino) {
     location = destino;
+}
+
+function LetraFoco (letra, semResposta){
+    //A letra da vez ganha o foco da pergunta
+    if(semResposta == true){
+        document.getElementById("circle-" + String.fromCharCode(letra + 65)).classList.add("btn-info");
+        document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.fontSize = "large";
+
+        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.top="55%";
+        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.left="48.5%";
+        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.width="45px";
+        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.height="45px";
+    }
+    //A letra da vez perde o foco da pergunta
+    else{
+        document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.fontSize = "medium";
+
+        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.top="55%";
+        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.left="48.5%";
+        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.width="45px";
+        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.height="45px";
+    }
 }
 
 //Em construsção
