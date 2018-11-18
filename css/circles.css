@@ -4,15 +4,14 @@
  */
 .circle-container {
 	position: relative;
-width: 19em;
-height: 19em;
-padding: 2.8em; /*= 2em * 1.4 (2em = half the width of an img, 1.4 = sqrt(2))*/
-
-/* border: dashed 1px;
-border-radius: 50%; */
-margin: 1.75em auto 0;
-
+	width: 19em;
+	height: 19em;
+	padding: 2.8em; /*= 2em * 1.4 (2em = half the width of an img, 1.4 = sqrt(2))*/
+	/* border: dashed 1px;
+	border-radius: 50%; */
+	margin: 1.75em auto 0;
 }
+
 .circle-container img {
 	display: block;
 	overflow: hidden;
@@ -35,5 +34,13 @@ margin: 1.75em auto 0;
 	border-style: solid;
 	border-width: 1px;
 	border-color: lightgrey;
+}
 
+.menu-container div {
+	display: block;
+	overflow: hidden;
+	position: absolute;
+	top: 50%; left: 50%;
+	width: 2em; height: 2em;
+	margin: -1em; /* 2em = 4em/2 */ /* half the width */
 }

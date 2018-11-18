@@ -1,19 +1,18 @@
 ﻿//GlOBALS
+//Salva qual tema está
+let TEMA_ATUAL = null;
 //Conta em qual letra esta
-var LETTER_COUNT = 0;
+let LETTER_COUNT = 0;
 //Conta o numero de erros
-var ERROR_COUNT = 0;
+let ERROR_COUNT = 0;
 //Conta numero de acertos
-var HIT_COUNT = 0;
+let HIT_COUNT = 0;
 //Conta os passa-palavra
-var PASS_COUNT = 0;
+let PASS_COUNT = 0;
 //Salva ultimo numero random
-var LAST_RANDOM_NUMBER = 0;
+let LAST_RANDOM_NUMBER = 0;
 
-//US04 - Vai para o menu principal
-function MenuPrincipal() {
-    location.href = '../index.html';
-}
+const ALFABETO = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -22,17 +21,17 @@ function getRandomInt(min, max) {
 //i é o numero da letra, 0=a
 function LerPergunta(i) {
     if ( LETTER_COUNT < 26 ){
-
-    LAST_RANDOM_NUMBER = getRandomInt(0, 1);
-    var pergunta = DB.dados[i].questoes[LAST_RANDOM_NUMBER].pergunta;
-    document.getElementById('question').innerHTML = pergunta;
-    return pergunta;
-  }else {
-    location.replace("./tela_final.html")
+        TEMA_ATUAL = sessionStorage.getItem('TEMA_ATUAL')
+        LAST_RANDOM_NUMBER = getRandomInt(0, 1);
+        var pergunta = DB[TEMA_ATUAL][i][LAST_RANDOM_NUMBER].pergunta;
+        document.getElementById('question').innerHTML = pergunta;
+        return pergunta;
+    }else {
+      location.replace("./tela_final.html")
   }
 }
 
-function PassouAPalavra(){
+function PassouAPalavra() {
     colorirCircle(3);
     PASS_COUNT++;
     LETTER_COUNT++;
@@ -44,40 +43,38 @@ function PassouAPalavra(){
     }
 }
 
-function colorirCircle(i) {
-    // se a pergunta respondida estiver certa
-    if (i == 1){
-        document.getElementById("circle-"+String.fromCharCode(LETTER_COUNT+65)).classList.add("btn-success");
-
-    // se errar
-    }if(i == 2){
-        document.getElementById("circle-"+String.fromCharCode(LETTER_COUNT+65)).classList.add("btn-danger");
-    }
-
-    // se for passa a palavra
-    if (i == 3){
-        document.getElementById("circle-"+String.fromCharCode(LETTER_COUNT+65)).classList.add("btn-warning");
-    }
-    document.getElementById("form-resposta").reset();
-}
-
 function contador() {
     HIT_COUNT = sessionStorage.getItem('HIT');
     document.getElementById("respostaFinal").innerHTML = "Voce acertou " + HIT_COUNT + " perguntas!";
 }
 
 //resets all global variables and go to game screen
-function resetGame(where_from) {
+function router(where_from, tema) {
     sessionStorage.setItem('HIT', '0');
     if (where_from == "index") {
-        location.replace("./views/tela_jogo.html")
+        sessionStorage.setItem('HIT_COUNT', 0);
+        location.replace("./views/tela_temas.html")
+    }
+    else if (where_from == "menu") {
+        location.replace("./tela_jogo.html")
+    }
+    else if (where_from == "criarTemas") {
+        location.replace("./tela_criar_temas.html")
+    }
+    else if (where_from == "personalizar") {
+        location.replace("./views/tela_criar_temas.html")
+    }
+    else if (where_from == "themeSelection") {
+        sessionStorage.setItem('TEMA_ATUAL', tema);
+        location.replace("../views/tela_jogo.html")
+    }
+    else if (where_from == "tela_final") {
+        location.replace("../index.html")
     }
     else {
         location.replace("../views/tela_jogo.html")
     }
 }
-
-
 
 //Confere o valor no Form=form-resposta com o .resposta no JSON
 function ConfereResposta(i) {
@@ -86,7 +83,7 @@ function ConfereResposta(i) {
     }
     else {
         var Fres = document.getElementById('form-resposta').Fresposta.value;
-        var JSres = DB.dados[i].questoes[LAST_RANDOM_NUMBER].resposta;
+        var JSres = DB[TEMA_ATUAL][i][LAST_RANDOM_NUMBER].resposta;
 
         document.getElementById('form-resposta').Fresposta.value = '';
 
@@ -94,7 +91,7 @@ function ConfereResposta(i) {
         JSres = TratamentoString(JSres);
 
         //Resposta correta
-        if(Fres == ''){
+        if (Fres == '') {
             PassouAPalavra();
         }
         else if (Fres == JSres) {
@@ -122,7 +119,6 @@ function ConfereResposta(i) {
             }
         }
     }
-
 }
 
 //Tratamento da string
@@ -130,7 +126,7 @@ function TratamentoString(str) {
     str = str.replace(/ /g, "");
     str = str.replace(/[AÁÀÂÃÄáàâãä]/g, "a");
     str = str.replace(/[B]/g, "b");
-    str = str.replace(/[Cç]/g, "c");
+    str = str.replace(/[CÇç]/g, "c");
     str = str.replace(/[D]/g, "d");
     str = str.replace(/[EÉÈÊËéèêë]/g, "e");
     str = str.replace(/[F]/g, "f");
@@ -166,4 +162,32 @@ function FinalizaJogo(i) {
         location.href = "tela_final.html";
         contador();
     }
+}
+
+function mudarTela(destino) {
+    location = destino;
+}
+
+//Em construsção
+var cont = 0;
+function formularioJson() {
+    var letra = document.getElementById('campo-letra').value;
+    var tema = document.getElementById('campo-tema').value;
+    var pergunta = document.getElementById('campo-pergunta').value;
+    var resposta = document.getElementById('campo-resposta').value;
+    var questao = `<input type="checkbox" id="test-${cont}" value=1> Tema: ${tema} - Letra: ${letra} - Pergunta: ${pergunta} - Resposta: ${resposta}<br>`;
+    document.getElementById('campo-questoes').innerHTML += questao;
+    
+    var DB = new Object();
+    DB.tema = tema;
+    DB.dados = new Array();
+    DB.dados[0].letra = letra;
+    DB.dados[0].questoes = new Array;
+    DB.dados[0].questoes[0].pergunta = pergunta;
+    DB.dados[0].questoes[0].resposta = resposta;
+    var textJSON = JSON.stringify(DB);
+    document.write(textJSON);
+    document.getElementById('campo-questoes').innerHTML = textJSON;
+
+    cont++;
 }
