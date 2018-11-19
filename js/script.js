@@ -30,7 +30,7 @@ function LerPergunta(i) {
         });
         return pergunta;
     }else {
-      location.replace("./tela_final.html")
+      location = "./tela_final.html";
   }
 }
 
@@ -56,26 +56,26 @@ function router(where_from, tema) {
     sessionStorage.setItem('HIT', '0');
     if (where_from == "index") {
         sessionStorage.setItem('HIT_COUNT', 0);
-        location.replace("./views/tela_temas.html")
+        location = "./views/tela_temas.html";
     }
     else if (where_from == "menu") {
-        location.replace("./tela_jogo.html")
+        location = "./tela_jogo.html";
     }
     else if (where_from == "criarTemas") {
-        location.replace("./tela_criar_temas.html")
+        location = "./tela_criar_temas.html";
     }
     else if (where_from == "personalizar") {
-        location.replace("./views/tela_criar_temas.html")
+        location = "./views/tela_criar_temas.html";
     }
     else if (where_from == "themeSelection") {
         sessionStorage.setItem('TEMA_ATUAL', tema);
-        location.replace("../views/tela_jogo.html")
+        location = "../views/tela_jogo.html";
     }
     else if (where_from == "tela_final") {
-        location.replace("../index.html")
+        location = "../index.html";
     }
     else {
-        location.replace("../views/tela_jogo.html")
+        location = "../views/tela_jogo.html";
     }
 }
 
