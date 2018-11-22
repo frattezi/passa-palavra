@@ -28,22 +28,28 @@
 
     <!-- Javascript interno -->
     <script src="../js/script.js"></script>
-    <script src="../json/questoes.js"></script>
-    <script src="../js/menu_temas.js"></script>
 
   </head>
 
-  <body onload = "criarMenuTemas()">
-
+  <body>
 
     <!-- Header -->
     <header class="mt-5 bg-primary text-center">
       <div class="container">
         <br>
-        <h1>Escolha um tema:</h1>
+        <h1>Escolha um avatar:</h1>
         <br><br>
         <div class='menu-container' id="menu-container"></div><br>
-        <button class="btn btn-primary w-25 mt-25" onclick="router('criarTemas', null)">Criar Tema</button>
+        <img src="../img/portfolio/werneck.png"   height="200" width="200" onclick= "SetAvatar(1)">
+        <img src="../img/portfolio/rommel.png"    height="200" width="200" onclick= "SetAvatar(2)">
+        <img src="../img/portfolio/cabin.png"     height="200" width="200" onclick= "SetAvatar(3)">
+        <img src="../img/portfolio/cake.png"      height="200" width="200" onclick= "SetAvatar(4)">
+        <img src="../img/portfolio/circus.png"    height="200" width="200" onclick= "SetAvatar(5)">
+        <img src="../img/portfolio/game.png"      height="200" width="200" onclick= "SetAvatar(6)">
+        <img src="../img/portfolio/profile.png"   height="200" width="200" onclick= "SetAvatar(7)">
+        <img src="../img/portfolio/safe.png"      height="200" width="200" onclick= "SetAvatar(8)">
+        <img src="../img/portfolio/submarine.png" height="200" width="200" onclick= "SetAvatar(9)">
+
       </div>
     </header>
 

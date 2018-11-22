@@ -1,6 +1,10 @@
 ﻿//GlOBALS
 //Salva qual tema está
 let TEMA_ATUAL = null;
+//Salva qual o avatar escolhido
+let AVATAR = 7;
+//Verifica se está jogando
+let INGAME = 0;
 //Conta em qual letra esta
 let LETTER_COUNT = 0;
 //Conta o numero de erros
@@ -14,6 +18,11 @@ let LAST_RANDOM_NUMBER = 0;
 
 const ALFABETO = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 
+function SetAvatar(i){
+    sessionStorage.setItem('AVATAR', i);
+    router("tela_final", 0);
+}
+
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -21,7 +30,7 @@ function getRandomInt(min, max) {
 //i é o numero da letra, 0=a
 function LerPergunta(i) {
     if ( LETTER_COUNT < 26 ){
-        TEMA_ATUAL = sessionStorage.getItem('TEMA_ATUAL')
+        TEMA_ATUAL = sessionStorage.getItem('TEMA_ATUAL');
         LAST_RANDOM_NUMBER = getRandomInt(0, 1);
         var pergunta = DB[TEMA_ATUAL][i][LAST_RANDOM_NUMBER].pergunta;
         document.getElementById('question').innerHTML = `<span>${pergunta}</span>`;
@@ -35,6 +44,7 @@ function LerPergunta(i) {
 }
 
 function PassouAPalavra() {
+    LetraFoco(LETTER_COUNT, false);
     colorirCircle(3);
     PASS_COUNT++;
     LETTER_COUNT++;
@@ -49,33 +59,51 @@ function PassouAPalavra() {
 function contador() {
     HIT_COUNT = sessionStorage.getItem('HIT');
     document.getElementById("respostaFinal").innerHTML = "Voce acertou " + HIT_COUNT + " perguntas!";
+    sessionStorage.setItem('HIT', 0);
 }
 
-//resets all global variables and go to game screen
+//Reseta as variaveis globais e redireciona para a tela correspondente ao parametro
 function router(where_from, tema) {
-    sessionStorage.setItem('HIT', '0');
     if (where_from == "index") {
         sessionStorage.setItem('HIT_COUNT', 0);
-        location = "./views/tela_temas.html";
+        location.replace("./views/tela_temas.html");
+        //INGAME = false;
+        sessionStorage.setItem('INGAME', 0);
     }
     else if (where_from == "menu") {
-        location = "./tela_jogo.html";
+        location.replace("./tela_jogo.html");
+        //INGAME = true;
+        sessionStorage.setItem('INGAME', 1);
     }
     else if (where_from == "criarTemas") {
-        location = "./tela_criar_temas.html";
+        location.replace("./tela_criar_temas.html");
     }
     else if (where_from == "personalizar") {
-        location = "./views/tela_criar_temas.html";
+        location.replace("./views/tela_criar_temas.html");
+    }
+    else if (where_from == "escolheAvatar") {
+        location.replace("./views/tela_avatar.html");
     }
     else if (where_from == "themeSelection") {
         sessionStorage.setItem('TEMA_ATUAL', tema);
-        location = "../views/tela_jogo.html";
+        location.replace("../views/tela_jogo.html");
+        //INGAME = true;
+        sessionStorage.setItem('INGAME', 1);
     }
     else if (where_from == "tela_final") {
-        location = "../index.html";
+        location.replace("../index.html");
+        //INGAME = false;
+        sessionStorage.setItem('INGAME', 0);
+    }
+    else if (where_from == "tela_jogo") {
+        location.replace("./tela_final.html");
+        //INGAME = false;
+        sessionStorage.setItem('INGAME', 0);
     }
     else {
-        location = "../views/tela_jogo.html";
+        location.replace("../views/tela_jogo.html");
+        //INGAME = true;
+        sessionStorage.setItem('INGAME', 1);
     }
 }
 
@@ -85,6 +113,7 @@ function ConfereResposta(i) {
         FinalizaJogo(27);
     }
     else {
+        LetraFoco(LETTER_COUNT, false);
         var Fres = document.getElementById('form-resposta').Fresposta.value;
         var JSres = DB[TEMA_ATUAL][i][LAST_RANDOM_NUMBER].resposta;
 
@@ -158,17 +187,36 @@ function TratamentoString(str) {
 
 //Finaliza o jogo
 function FinalizaJogo(i) {
-    if (i >= 26) {
+    if (i = 26) {
         document.getElementById('button-res').innerHTML = 'Finalizar Jogo';
-    }
-    if (i >= 27) {
-        location.href = "tela_final.html";
-        contador();
+        document.getElementById('button-res').onclick = function(){router('tela_jogo', 0)};
     }
 }
 
 function mudarTela(destino) {
     location = destino;
+}
+
+function LetraFoco (letra, respondida){
+    //A letra da vez ganha o foco da pergunta
+    if(respondida == false){
+        document.getElementById("circle-" + String.fromCharCode(letra + 65)).classList.add("btn-info");
+        document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.fontSize = "large";
+
+        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.top="55%";
+        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.left="48.5%";
+        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.width="45px";
+        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.height="45px";
+    }
+    //A letra da vez perde o foco da pergunta
+    else{
+        document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.fontSize = "medium";
+
+        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.top="55%";
+        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.left="48.5%";
+        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.width="45px";
+        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.height="45px";
+    }
 }
 
 //Em construsção
