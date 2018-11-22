@@ -60,7 +60,6 @@ function contador() {
 
 //Reseta as variaveis globais e redireciona para a tela correspondente ao parametro
 function router(where_from, tema) {
-    //sessionStorage.setItem('HIT', '0');
     if (where_from == "index") {
         sessionStorage.setItem('HIT_COUNT', 0);
         location.replace("./views/tela_temas.html");
@@ -88,6 +87,7 @@ function router(where_from, tema) {
         sessionStorage.setItem('INGAME', 1);
     }
     else if (where_from == "tela_final") {
+        sessionStorage.setItem('HIT', 0);
         location.replace("../index.html");
         //INGAME = false;
         sessionStorage.setItem('INGAME', 0);
@@ -98,6 +98,7 @@ function router(where_from, tema) {
         sessionStorage.setItem('INGAME', 0);
     }
     else {
+        sessionStorage.setItem('HIT', 0);
         location.replace("../views/tela_jogo.html");
         //INGAME = true;
         sessionStorage.setItem('INGAME', 1);
