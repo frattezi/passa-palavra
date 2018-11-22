@@ -30,11 +30,11 @@ function getRandomInt(min, max) {
 //i é o numero da letra, 0=a
 function LerPergunta(i) {
     if ( LETTER_COUNT < 26 ){
+        document.getElementById("circle-" + String.fromCharCode(LETTER_COUNT + 65)).classList.add("btn-info");
         TEMA_ATUAL = sessionStorage.getItem('TEMA_ATUAL');
         LAST_RANDOM_NUMBER = getRandomInt(0, 1);
         var pergunta = DB[TEMA_ATUAL][i][LAST_RANDOM_NUMBER].pergunta;
         document.getElementById('question').innerHTML = pergunta;
-        LetraFoco(LETTER_COUNT, true);
         return pergunta;
     }else {
       location.replace("./tela_final.html")
@@ -42,7 +42,6 @@ function LerPergunta(i) {
 }
 
 function PassouAPalavra() {
-    LetraFoco(LETTER_COUNT, false);
     colorirCircle(3);
     PASS_COUNT++;
     LETTER_COUNT++;
@@ -111,7 +110,6 @@ function ConfereResposta(i) {
         FinalizaJogo(27);
     }
     else {
-        LetraFoco(LETTER_COUNT, false);
         var Fres = document.getElementById('form-resposta').Fresposta.value;
         var JSres = DB[TEMA_ATUAL][i][LAST_RANDOM_NUMBER].resposta;
 
@@ -195,27 +193,6 @@ function mudarTela(destino) {
     location = destino;
 }
 
-function LetraFoco (letra, respondida){
-    //A letra da vez ganha o foco da pergunta
-    if(respondida == false){
-        document.getElementById("circle-" + String.fromCharCode(letra + 65)).classList.add("btn-info");
-        document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.fontSize = "large";
-
-        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.top="55%";
-        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.left="48.5%";
-        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.width="45px";
-        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.height="45px";
-    }
-    //A letra da vez perde o foco da pergunta
-    else{
-        document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.fontSize = "medium";
-
-        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.top="55%";
-        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.left="48.5%";
-        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.width="45px";
-        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.height="45px";
-    }
-}
 
 //Em construsção
 var cont = 0;
