@@ -94,7 +94,7 @@ function router(where_from, tema) {
         sessionStorage.setItem('INGAME', 0);
     }
     else if (where_from == "tela_jogo") {
-        location.replace("./views/tela_final.html");
+        location.replace("./tela_final.html");
         //INGAME = false;
         sessionStorage.setItem('INGAME', 0);
     }
@@ -107,13 +107,11 @@ function router(where_from, tema) {
 
 //Confere o valor no Form=form-resposta com o .resposta no JSON
 function ConfereResposta(i) {
-    LetraFoco(LETTER_COUNT, false);
-
     if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
         FinalizaJogo(27);
     }
     else {
-
+        LetraFoco(LETTER_COUNT, false);
         var Fres = document.getElementById('form-resposta').Fresposta.value;
         var JSres = DB[TEMA_ATUAL][i][LAST_RANDOM_NUMBER].resposta;
 
@@ -187,13 +185,9 @@ function TratamentoString(str) {
 
 //Finaliza o jogo
 function FinalizaJogo(i) {
-    if (i >= 26) {
+    if (i = 26) {
         document.getElementById('button-res').innerHTML = 'Finalizar Jogo';
-    }
-    if (i >= 27) {
-        //location.href = "tela_final.html";
-        router("tela_final", 0);
-        contador();
+        document.getElementById('button-res').onclick = function(){router('tela_jogo', 0)};
     }
 }
 
