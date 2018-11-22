@@ -34,7 +34,7 @@ function LerPergunta(i) {
         LAST_RANDOM_NUMBER = getRandomInt(0, 1);
         var pergunta = DB[TEMA_ATUAL][i][LAST_RANDOM_NUMBER].pergunta;
         document.getElementById('question').innerHTML = pergunta;
-        LetraFoco(LETTER_COUNT, true);
+        LetraFoco(LETTER_COUNT, false);
         return pergunta;
     }else {
       location.replace("./tela_final.html")
@@ -42,7 +42,7 @@ function LerPergunta(i) {
 }
 
 function PassouAPalavra() {
-    LetraFoco(LETTER_COUNT, false);
+    LetraFoco(LETTER_COUNT, true);
     colorirCircle(3);
     PASS_COUNT++;
     LETTER_COUNT++;
@@ -57,11 +57,11 @@ function PassouAPalavra() {
 function contador() {
     HIT_COUNT = sessionStorage.getItem('HIT');
     document.getElementById("respostaFinal").innerHTML = "Voce acertou " + HIT_COUNT + " perguntas!";
+    sessionStorage.setItem('HIT', 0);
 }
 
 //Reseta as variaveis globais e redireciona para a tela correspondente ao parametro
 function router(where_from, tema) {
-    sessionStorage.setItem('HIT', '0');
     if (where_from == "index") {
         sessionStorage.setItem('HIT_COUNT', 0);
         location.replace("./views/tela_temas.html");
@@ -69,21 +69,26 @@ function router(where_from, tema) {
         sessionStorage.setItem('INGAME', 0);
     }
     else if (where_from == "menu") {
+        sessionStorage.setItem('HIT_COUNT', 0);
         location.replace("./tela_jogo.html");
         //INGAME = true;
         sessionStorage.setItem('INGAME', 1);
     }
     else if (where_from == "criarTemas") {
+        sessionStorage.setItem('HIT_COUNT', 0);
         location.replace("./tela_criar_temas.html");
     }
     else if (where_from == "personalizar") {
-        location.replace("./views/tela_criar_temas.html");
+        sessionStorage.setItem('HIT_COUNT', 0);
+        location.replace("./views/register.html");
     }
     else if (where_from == "escolheAvatar") {
+        sessionStorage.setItem('HIT_COUNT', 0);
         location.replace("./views/tela_avatar.html");
     }
     else if (where_from == "themeSelection") {
         sessionStorage.setItem('TEMA_ATUAL', tema);
+        sessionStorage.setItem('HIT_COUNT', 0);
         location.replace("../views/tela_jogo.html");
         //INGAME = true;
         sessionStorage.setItem('INGAME', 1);
@@ -99,6 +104,7 @@ function router(where_from, tema) {
         sessionStorage.setItem('INGAME', 0);
     }
     else {
+        sessionStorage.setItem('HIT_COUNT', 0);
         location.replace("../views/tela_jogo.html");
         //INGAME = true;
         sessionStorage.setItem('INGAME', 1);
@@ -111,7 +117,7 @@ function ConfereResposta(i) {
         FinalizaJogo(27);
     }
     else {
-        LetraFoco(LETTER_COUNT, false);
+        LetraFoco(LETTER_COUNT, true);
         var Fres = document.getElementById('form-resposta').Fresposta.value;
         var JSres = DB[TEMA_ATUAL][i][LAST_RANDOM_NUMBER].resposta;
 
@@ -200,20 +206,10 @@ function LetraFoco (letra, respondida){
     if(respondida == false){
         document.getElementById("circle-" + String.fromCharCode(letra + 65)).classList.add("btn-info");
         document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.fontSize = "large";
-
-        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.top="55%";
-        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.left="48.5%";
-        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.width="45px";
-        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.height="45px";
     }
     //A letra da vez perde o foco da pergunta
     else{
         document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.fontSize = "medium";
-
-        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.top="55%";
-        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.left="48.5%";
-        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.width="45px";
-        //document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.height="45px";
     }
 }
 
