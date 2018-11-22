@@ -60,7 +60,7 @@ function contador() {
 
 //Reseta as variaveis globais e redireciona para a tela correspondente ao parametro
 function router(where_from, tema) {
-    sessionStorage.setItem('HIT', '0');
+    //sessionStorage.setItem('HIT', '0');
     if (where_from == "index") {
         sessionStorage.setItem('HIT_COUNT', 0);
         location.replace("./views/tela_temas.html");
@@ -125,7 +125,7 @@ function ConfereResposta(i) {
         else if (Fres == JSres) {
             colorirCircle(1);
             HIT_COUNT++;
-            sessionStorage.setItem("HIT", HIT_COUNT);
+            sessionStorage.setItem('HIT', HIT_COUNT);
             LETTER_COUNT++;
             if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
                 FinalizaJogo(26);
