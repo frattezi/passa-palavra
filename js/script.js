@@ -38,7 +38,7 @@ function LerPergunta(i) {
         LetraFoco(LETTER_COUNT, false);
         return pergunta;
     }else {
-      location.replace("./tela_final.html")
+      location ="./tela_final.html";
   }
 }
 
@@ -65,48 +65,48 @@ function contador() {
 function router(where_from, tema) {
     if (where_from == "index") {
         sessionStorage.setItem('HIT_COUNT', 0);
-        location.replace("./views/tela_temas.html");
+        location ="./views/tela_temas.html";
         //INGAME = false;
         sessionStorage.setItem('INGAME', 0);
     }
     else if (where_from == "menu") {
         sessionStorage.setItem('HIT_COUNT', 0);
-        location.replace("./tela_jogo.html");
+        location ="./tela_jogo.html";
         //INGAME = true;
         sessionStorage.setItem('INGAME', 1);
     }
     else if (where_from == "criarTemas") {
         sessionStorage.setItem('HIT_COUNT', 0);
-        location.replace("./tela_criar_temas.html");
+        location ="./tela_criar_temas.html";
     }
     else if (where_from == "personalizar") {
         sessionStorage.setItem('HIT_COUNT', 0);
-        location.replace("./views/register.html");
+        location ="./views/tela_criar_tema.html";
     }
     else if (where_from == "escolheAvatar") {
         sessionStorage.setItem('HIT_COUNT', 0);
-        location.replace("./views/tela_avatar.html");
+        location ="./views/tela_avatar.html";
     }
     else if (where_from == "themeSelection") {
         sessionStorage.setItem('TEMA_ATUAL', tema);
         sessionStorage.setItem('HIT_COUNT', 0);
-        location.replace("../views/tela_jogo.html");
+        location ="../views/tela_jogo.html";
         //INGAME = true;
         sessionStorage.setItem('INGAME', 1);
     }
     else if (where_from == "tela_final") {
-        location.replace("../index.html");
+        location ="../index.html";
         //INGAME = false;
         sessionStorage.setItem('INGAME', 0);
     }
     else if (where_from == "tela_jogo") {
-        location.replace("./tela_final.html");
+        location ="./tela_final.html";
         //INGAME = false;
         sessionStorage.setItem('INGAME', 0);
     }
     else {
         sessionStorage.setItem('HIT_COUNT', 0);
-        location.replace("../views/tela_jogo.html");
+        location ="../views/tela_jogo.html";
         //INGAME = true;
         sessionStorage.setItem('INGAME', 1);
     }
@@ -198,10 +198,6 @@ function FinalizaJogo(i) {
     }
 }
 
-function mudarTela(destino) {
-    location = destino;
-}
-
 function LetraFoco (letra, respondida){
     //A letra da vez ganha o foco da pergunta
     if(respondida == false){
@@ -236,4 +232,31 @@ function formularioJson() {
     document.getElementById('campo-questoes').innerHTML = textJSON;
 
     cont++;
+}
+
+//TODO: Adicionar perguntas
+function adicionarTemas() {
+    if (localStorage.getItem('DADOS')) {
+        DB = localStorage.getItem('DADOS');
+    }
+    regNovo = new Object;
+    regNovo[campoTema] = new Array;
+    regNovo[campoTema][campoLetra] = new Array;
+    if (CHECK == 1) {
+        for (var i = 0; i < 25; i++) {
+            regNovo[campoTema][campoLetra].pergunta = "stringVazia";
+            regNovo[campoTema][campoLetra].resposta = "stringVazia";
+        }
+    } else {
+        var CHECK = 0;
+    }
+    var campoTema = document.getElementById('campo-tema').value;
+    var campoLetra = document.getElementById('campo-letra').value;
+    var campoPergunta = document.getElementById('campo-pergunta').value;
+    var campoResposta = document.getElementById('campo-resposta').value;
+    var novaChave = {pergunta: campoPergunta,resposta: campoResposta};
+    regNovo[campoTema][campoLetra].push(novaChave);
+
+    
+
 }
