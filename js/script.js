@@ -35,7 +35,12 @@ function LerPergunta(i) {
     }
     if (LETTER_COUNT < 26) {
         TEMA_ATUAL = sessionStorage.getItem('TEMA_ATUAL');
-        LAST_RANDOM_NUMBER = getRandomInt(0, DB[TEMA_ATUAL][parseInt(i)].length);
+        LAST_RANDOM_NUMBER = getRandomInt(0, DB[TEMA_ATUAL][parseInt(i)].length - 1);
+        while (DB[TEMA_ATUAL][parseInt(i)][LAST_RANDOM_NUMBER] == null) {
+            LETTER_COUNT++;
+            i++;
+            if(DB[TEMA_ATUAL][parseInt(i)] == null){LETTER_COUNT=26; FinalizaJogo(26);}
+        }
         var pergunta = DB[TEMA_ATUAL][parseInt(i)][LAST_RANDOM_NUMBER].pergunta;
         document.getElementById('question').innerHTML = `<span>${pergunta}</span>`;
         $('#question').textfill({
@@ -80,7 +85,7 @@ function router(where_from, tema) {
         sessionStorage.setItem('INGAME', 1);
     } else if (where_from == "criarTemas") {
         sessionStorage.setItem('HIT_COUNT', 0);
-        location = "./tela_criar_temas.html";
+        location = "./tela_criar_tema.html";
     } else if (where_from == "personalizar") {
         sessionStorage.setItem('HIT_COUNT', 0);
         location = "./views/tela_criar_tema.html";
@@ -102,8 +107,7 @@ function router(where_from, tema) {
         //INGAME = false;
         sessionStorage.setItem('INGAME', 0);
     } else if (where_from == "tela_criar_tema") {
-        sessionStorage.setItem('HIT_COUNT', 0);
-        location = "../views/tela_temas.html";
+        location = "../index.html";
         //INGAME = false;
         sessionStorage.setItem('INGAME', 0);
     } else {
@@ -213,7 +217,7 @@ function LetraFoco(letra, respondida) {
 //TODO: Adicionar perguntas
 function adicionarQuestao() {
     if (localStorage.getItem('DADOS')) {
-        DB = localStorage.getItem('DADOS');
+        DB = JSON.parse(localStorage.getItem('DADOS'))
     }
     var formQuestoes = document.getElementById('form-questoes').checkValidity();
     if (formQuestoes == true) {
@@ -237,8 +241,14 @@ function adicionarQuestao() {
 
 //
 function salvarTema() {
+    for (var i = 0; i < 26; i++) {
+        if (regNovo[campoTema][i] == null) {
+            regNovo[campoTema][i] = "";
+        }
+    }
     DB[campoTema] = regNovo[campoTema];
     localStorage.setItem("DADOS", JSON.stringify(DB));
+    router(tela_criar_tema, 0);
 }
 
 //
