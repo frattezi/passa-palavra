@@ -34,9 +34,8 @@ function LerPergunta(i) {
         LAST_RANDOM_NUMBER = getRandomInt(0, 1);
         var pergunta = DB[TEMA_ATUAL][i][LAST_RANDOM_NUMBER].pergunta;
         document.getElementById('question').innerHTML = `<span>${pergunta}</span>`;
-        $('#question').textfill({
-            maxFontPixels: 0
-        });
+        $('#question').textfill({maxFontPixels: 0});
+        LetraFoco(LETTER_COUNT, false);
         return pergunta;
     }else {
       location = "./tela_final.html";
