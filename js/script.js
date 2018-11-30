@@ -215,21 +215,24 @@ function adicionarQuestao() {
     if (localStorage.getItem('DADOS')) {
         DB = localStorage.getItem('DADOS');
     }
-    var campoLetra = document.getElementById('campo-letra').value;
-    var campoPergunta = document.getElementById('campo-pergunta').value;
-    var campoResposta = document.getElementById('campo-resposta').value;
-    var novaChave = {
-        pergunta: campoPergunta,
-        resposta: campoResposta
-    };
-    if (regNovo[campoTema][campoLetra] == null) {
-        regNovo[campoTema][campoLetra] = new Array();
-    }
-    regNovo[campoTema][campoLetra].push(novaChave);
+    var formQuestoes = document.getElementById('form-questoes').checkValidity();
+    if (formQuestoes == true) {
+        var campoLetra = document.getElementById('campo-letra').value;
+        var campoPergunta = document.getElementById('campo-pergunta').value;
+        var campoResposta = document.getElementById('campo-resposta').value;
+        var novaChave = {
+            pergunta: campoPergunta,
+            resposta: campoResposta
+        };
+        if (regNovo[campoTema][campoLetra] == null) {
+            regNovo[campoTema][campoLetra] = new Array();
+        }
+        regNovo[campoTema][campoLetra].push(novaChave);
 
-    document.getElementById('campo-pergunta').value = "";
-    document.getElementById('campo-resposta').value = "";
-    preencheQuestoes();
+        document.getElementById('campo-pergunta').value = "";
+        document.getElementById('campo-resposta').value = "";
+        preencheQuestoes();
+    }
 }
 
 //
@@ -263,12 +266,12 @@ function preencheQuestoes() {
         if (regNovo[campoTema][cont] != null) {
             for (let cont2 = 0; cont2 < regNovo[campoTema][cont].length; cont2++) {
                 document.getElementById('campo-questoes').innerHTML += `
+                <button class="btn btn-light" onclick="deleteArray('${campoTema}',${cont},${cont2})"><img width="20px" src="../img/trash.svg"></button>
+                <button class="btn btn-light" onclick="editArray('${campoTema}',${cont},${cont2})"><img width="20px" src="../img/pencil.svg"></button>
                 Tema: ${campoTema}  
                 - Letra: ${String.fromCharCode(cont+65)} 
                 - Pergunta: ${regNovo[campoTema][cont][cont2].pergunta} 
-                - Resposta: ${regNovo[campoTema][cont][cont2].resposta} 
-                <button class="btn btn-light" onclick="deleteArray('${campoTema}',${cont},${cont2})"><img width="20px" src="../img/trash.svg"></button>
-                <button class="btn btn-light" onclick="editArray('${campoTema}',${cont},${cont2})"><img width="20px" src="../img/pencil.svg"></button><br>`;
+                - Resposta: ${regNovo[campoTema][cont][cont2].resposta} <br>`;
             }
         }
     }

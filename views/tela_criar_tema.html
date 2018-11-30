@@ -37,7 +37,7 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Registro de Perguntas e Respostas</div>
       <div class="card-body">
-        <form>
+        <form id="form-questoes">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-9 col-9">
@@ -45,7 +45,7 @@
                 <div class="input-group mb-3" id="campo-tema-input">
                   <input type="text" id="campo-tema" class="form-control" required>
                   <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" onclick="confirmaTema()">Confirmar</button>
+                    <button class="btn btn-outline-secondary" onclick="confirmaTema()">Confirmar</button>
                   </div>
                 </div>
               </div>
@@ -97,7 +97,7 @@
         </form>
         <div class="container mb-1">
           <div class="row">
-            <button class="btn btn-success col mr-2" onclick="adicionarQuestao()">Incluir Registro</button>
+            <button class="btn btn-success col mr-2" form="form-questoes" onclick="adicionarQuestao()">Incluir Registro</button>
             <button class="btn btn-danger col ml-2" onclick="salvarTema();">Salvar</button>
           </div>
         </div>
