@@ -248,7 +248,7 @@ function salvarTema() {
     }
     DB[campoTema] = regNovo[campoTema];
     localStorage.setItem("DADOS", JSON.stringify(DB));
-    router(tela_criar_tema, 0);
+    router("tela_criar_tema", 0);
 }
 
 //
