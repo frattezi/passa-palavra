@@ -16,9 +16,9 @@ let PASS_COUNT = 0;
 //Salva ultimo numero random
 let LAST_RANDOM_NUMBER = 0;
 
-const ALFABETO = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+const ALFABETO = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
-function SetAvatar(i){
+function SetAvatar(i) {
     sessionStorage.setItem('AVATAR', i);
     router("tela_final", 0);
 }
@@ -28,18 +28,24 @@ function getRandomInt(min, max) {
 }
 
 //i é o numero da letra, 0=a
+//TODO: pular letras faltantes
 function LerPergunta(i) {
-    if ( LETTER_COUNT < 26 ){
+    if (localStorage.getItem('DADOS')) {
+        DB = JSON.parse(localStorage.getItem('DADOS'))
+    }
+    if (LETTER_COUNT < 26) {
         TEMA_ATUAL = sessionStorage.getItem('TEMA_ATUAL');
-        LAST_RANDOM_NUMBER = getRandomInt(0, 1);
-        var pergunta = DB[TEMA_ATUAL][i][LAST_RANDOM_NUMBER].pergunta;
+        LAST_RANDOM_NUMBER = getRandomInt(0, DB[TEMA_ATUAL][parseInt(i)].length);
+        var pergunta = DB[TEMA_ATUAL][parseInt(i)][LAST_RANDOM_NUMBER].pergunta;
         document.getElementById('question').innerHTML = `<span>${pergunta}</span>`;
-        $('#question').textfill({maxFontPixels: 0});
+        $('#question').textfill({
+            maxFontPixels: 0
+        });
         LetraFoco(LETTER_COUNT, false);
         return pergunta;
-    }else {
-      location ="./tela_final.html";
-  }
+    } else {
+        location = "./tela_final.html";
+    }
 }
 
 function PassouAPalavra() {
@@ -49,8 +55,7 @@ function PassouAPalavra() {
     LETTER_COUNT++;
     if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
         FinalizaJogo(26);
-    }
-    else {
+    } else {
         LerPergunta(LETTER_COUNT);
     }
 }
@@ -65,48 +70,45 @@ function contador() {
 function router(where_from, tema) {
     if (where_from == "index") {
         sessionStorage.setItem('HIT_COUNT', 0);
-        location ="./views/tela_temas.html";
+        location = "./views/tela_temas.html";
         //INGAME = false;
         sessionStorage.setItem('INGAME', 0);
-    }
-    else if (where_from == "menu") {
+    } else if (where_from == "menu") {
         sessionStorage.setItem('HIT_COUNT', 0);
-        location ="./tela_jogo.html";
+        location = "./tela_jogo.html";
         //INGAME = true;
         sessionStorage.setItem('INGAME', 1);
-    }
-    else if (where_from == "criarTemas") {
+    } else if (where_from == "criarTemas") {
         sessionStorage.setItem('HIT_COUNT', 0);
-        location ="./tela_criar_temas.html";
-    }
-    else if (where_from == "personalizar") {
+        location = "./tela_criar_temas.html";
+    } else if (where_from == "personalizar") {
         sessionStorage.setItem('HIT_COUNT', 0);
-        location ="./views/tela_criar_tema.html";
-    }
-    else if (where_from == "escolheAvatar") {
+        location = "./views/tela_criar_tema.html";
+    } else if (where_from == "escolheAvatar") {
         sessionStorage.setItem('HIT_COUNT', 0);
-        location ="./views/tela_avatar.html";
-    }
-    else if (where_from == "themeSelection") {
+        location = "./views/tela_avatar.html";
+    } else if (where_from == "themeSelection") {
         sessionStorage.setItem('TEMA_ATUAL', tema);
         sessionStorage.setItem('HIT_COUNT', 0);
-        location ="../views/tela_jogo.html";
+        location = "../views/tela_jogo.html";
         //INGAME = true;
         sessionStorage.setItem('INGAME', 1);
-    }
-    else if (where_from == "tela_final") {
-        location ="../index.html";
+    } else if (where_from == "tela_final") {
+        location = "../index.html";
         //INGAME = false;
         sessionStorage.setItem('INGAME', 0);
-    }
-    else if (where_from == "tela_jogo") {
-        location ="./tela_final.html";
+    } else if (where_from == "tela_jogo") {
+        location = "./tela_final.html";
         //INGAME = false;
         sessionStorage.setItem('INGAME', 0);
-    }
-    else {
+    } else if (where_from == "tela_criar_tema") {
         sessionStorage.setItem('HIT_COUNT', 0);
-        location ="../views/tela_jogo.html";
+        location = "../views/tela_temas.html";
+        //INGAME = false;
+        sessionStorage.setItem('INGAME', 0);
+    } else {
+        sessionStorage.setItem('HIT_COUNT', 0);
+        location = "../views/tela_jogo.html";
         //INGAME = true;
         sessionStorage.setItem('INGAME', 1);
     }
@@ -116,8 +118,7 @@ function router(where_from, tema) {
 function ConfereResposta(i) {
     if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
         FinalizaJogo(27);
-    }
-    else {
+    } else {
         LetraFoco(LETTER_COUNT, true);
         var Fres = document.getElementById('form-resposta').Fresposta.value;
         var JSres = DB[TEMA_ATUAL][i][LAST_RANDOM_NUMBER].resposta;
@@ -130,16 +131,14 @@ function ConfereResposta(i) {
         //Resposta correta
         if (Fres == '') {
             PassouAPalavra();
-        }
-        else if (Fres == JSres) {
+        } else if (Fres == JSres) {
             colorirCircle(1);
             HIT_COUNT++;
             sessionStorage.setItem("HIT", HIT_COUNT);
             LETTER_COUNT++;
             if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
                 FinalizaJogo(26);
-            }
-            else {
+            } else {
                 LerPergunta(LETTER_COUNT);
             }
         }
@@ -150,8 +149,7 @@ function ConfereResposta(i) {
             LETTER_COUNT++;
             if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
                 FinalizaJogo(26);
-            }
-            else {
+            } else {
                 LerPergunta(LETTER_COUNT);
             }
         }
@@ -194,69 +192,92 @@ function TratamentoString(str) {
 function FinalizaJogo(i) {
     if (i = 26) {
         document.getElementById('button-res').innerHTML = 'Finalizar Jogo';
-        document.getElementById('button-res').onclick = function(){router('tela_jogo', 0)};
+        document.getElementById('button-res').onclick = function () {
+            router('tela_jogo', 0)
+        };
     }
 }
 
-function LetraFoco (letra, respondida){
+function LetraFoco(letra, respondida) {
     //A letra da vez ganha o foco da pergunta
-    if(respondida == false){
+    if (respondida == false) {
         document.getElementById("circle-" + String.fromCharCode(letra + 65)).classList.add("btn-info");
         document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.fontSize = "large";
     }
     //A letra da vez perde o foco da pergunta
-    else{
+    else {
         document.getElementById("circle-" + String.fromCharCode(letra + 65)).style.fontSize = "medium";
     }
 }
 
-//Em construsção
-var cont = 0;
-function formularioJson() {
-    var letra = document.getElementById('campo-letra').value;
-    var tema = document.getElementById('campo-tema').value;
-    var pergunta = document.getElementById('campo-pergunta').value;
-    var resposta = document.getElementById('campo-resposta').value;
-    var questao = `<input type="checkbox" id="test-${cont}" value=1> Tema: ${tema} - Letra: ${letra} - Pergunta: ${pergunta} - Resposta: ${resposta}<br>`;
-    document.getElementById('campo-questoes').innerHTML += questao;
-    
-    var DB = new Object();
-    DB.tema = tema;
-    DB.dados = new Array();
-    DB.dados[0].letra = letra;
-    DB.dados[0].questoes = new Array;
-    DB.dados[0].questoes[0].pergunta = pergunta;
-    DB.dados[0].questoes[0].resposta = resposta;
-    var textJSON = JSON.stringify(DB);
-    document.write(textJSON);
-    document.getElementById('campo-questoes').innerHTML = textJSON;
-
-    cont++;
-}
-
 //TODO: Adicionar perguntas
-function adicionarTemas() {
+function adicionarQuestao() {
     if (localStorage.getItem('DADOS')) {
         DB = localStorage.getItem('DADOS');
     }
-    regNovo = new Object;
-    regNovo[campoTema] = new Array;
-    regNovo[campoTema][campoLetra] = new Array;
-    if (CHECK == 1) {
-        for (var i = 0; i < 25; i++) {
-            regNovo[campoTema][campoLetra].pergunta = "stringVazia";
-            regNovo[campoTema][campoLetra].resposta = "stringVazia";
-        }
-    } else {
-        var CHECK = 0;
-    }
-    var campoTema = document.getElementById('campo-tema').value;
     var campoLetra = document.getElementById('campo-letra').value;
     var campoPergunta = document.getElementById('campo-pergunta').value;
     var campoResposta = document.getElementById('campo-resposta').value;
-    var novaChave = {pergunta: campoPergunta,resposta: campoResposta};
+    var novaChave = {
+        pergunta: campoPergunta,
+        resposta: campoResposta
+    };
+    if (regNovo[campoTema][campoLetra] == null) {
+        regNovo[campoTema][campoLetra] = new Array();
+    }
     regNovo[campoTema][campoLetra].push(novaChave);
 
-    
+    document.getElementById('campo-pergunta').value = "";
+    document.getElementById('campo-resposta').value = "";
+    preencheQuestoes();
+}
+
+//
+function salvarTema() {
+    DB[campoTema] = regNovo[campoTema];
+    localStorage.setItem("DADOS", JSON.stringify(DB));
+}
+
+//
+function confirmaTema() {
+    if (document.getElementById('campo-tema').value != "") {
+        campoTema = document.getElementById('campo-tema').value;
+        document.getElementById('campo-tema-input').innerHTML = `
+        <h4 class="border-top border-bottom col text-center">
+        ${campoTema}
+        </h4>`;
+        regNovo = new Array();
+        regNovo[campoTema] = new Array();
+    }
+}
+
+function deleteArray(tema, x, y) {
+    //tema tem q ser string
+    regNovo[tema][x].splice(y, 1);
+    preencheQuestoes();
+}
+
+function preencheQuestoes() {
+    document.getElementById('campo-questoes').innerHTML = "Questões:<br>";
+    for (let cont = 0; cont < 25; cont++) {
+        if (regNovo[campoTema][cont] != null) {
+            for (let cont2 = 0; cont2 < regNovo[campoTema][cont].length; cont2++) {
+                document.getElementById('campo-questoes').innerHTML += `
+                Tema: ${campoTema}  
+                - Letra: ${String.fromCharCode(cont+65)} 
+                - Pergunta: ${regNovo[campoTema][cont][cont2].pergunta} 
+                - Resposta: ${regNovo[campoTema][cont][cont2].resposta} 
+                <button class="btn btn-light" onclick="deleteArray('${campoTema}',${cont},${cont2})"><img width="20px" src="../img/trash.svg"></button>
+                <button class="btn btn-light" onclick="editArray('${campoTema}',${cont},${cont2})"><img width="20px" src="../img/pencil.svg"></button><br>`;
+            }
+        }
+    }
+}
+
+function editArray(tema, x, y) {
+    document.getElementById('campo-letra').value = y;
+    document.getElementById('campo-pergunta').value = regNovo[tema][x][y].pergunta;
+    document.getElementById('campo-resposta').value = regNovo[tema][x][y].resposta;
+    deleteArray(tema, x, y);
 
 }
