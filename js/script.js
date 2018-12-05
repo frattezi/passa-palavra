@@ -278,9 +278,9 @@ function preencheQuestoes() {
                 document.getElementById('campo-questoes').innerHTML += `
                 <button class="btn btn-light" onclick="deleteArray('${campoTema}',${cont},${cont2})"><img width="20px" src="../img/trash.svg"></button>
                 <button class="btn btn-light" onclick="editArray('${campoTema}',${cont},${cont2})"><img width="20px" src="../img/pencil.svg"></button>
-                Tema: ${campoTema}  
-                - Letra: ${String.fromCharCode(cont+65)} 
-                - Pergunta: ${regNovo[campoTema][cont][cont2].pergunta} 
+                Tema: ${campoTema}
+                - Letra: ${String.fromCharCode(cont+65)}
+                - Pergunta: ${regNovo[campoTema][cont][cont2].pergunta}
                 - Resposta: ${regNovo[campoTema][cont][cont2].resposta} <br>`;
             }
         }
@@ -293,4 +293,15 @@ function editArray(tema, x, y) {
     document.getElementById('campo-resposta').value = regNovo[tema][x][y].resposta;
     deleteArray(tema, x, y);
 
+}
+
+function saveGameMode() {
+  for (var i = 0; i < 2; i++) {
+    if (document.getElementsByName('jogador')[i].checked){
+      sessionStorage.setItem("jogador", document.getElementsByName('jogador')[i].value);
+    }
+    if (document.getElementsByName('tempo')[i].checked){
+      sessionStorage.setItem("tempo", document.getElementsByName('tempo')[i].value);
+    }
+  }
 }
