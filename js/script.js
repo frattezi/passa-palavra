@@ -16,14 +16,45 @@ let PASS_COUNT = 0;
 //Salva ultimo numero random
 let LAST_RANDOM_NUMBER = 0;
 // Cria objeto player para salvar todas as variaveis de multijogador
+var numplayer = 0;
 
-let player_inicio ={ 'player': [{'HIT_COUNT': '0', 'AVATAR': '7', 'INGAME': '0', 'LETTER_COUNT': '0', 'ERROR_COUNT': '0', 'PASS_COUNT': '0', 'LAST_RANDOM_NUMBER': '0'},{'HIT_COUNT': '0', 'AVATAR': '7', 'INGAME': '0', 'LETTER_COUNT': '0', 'ERROR_COUNT': '0', 'PASS_COUNT': '0', 'LAST_RANDOM_NUMBER': '0'}]};
+let player_inicio ={ 'player': [{'HIT_COUNT': 0, 'AVATAR': 7, 'LETTER_COUNT': 0, 'ERROR_COUNT': 0, 'PASS_COUNT': 0, 'LAST_RANDOM_NUMBER': 0},{'HIT_COUNT': 0, 'AVATAR': 7, 'LETTER_COUNT': 0, 'ERROR_COUNT': 0, 'PASS_COUNT': 0, 'LAST_RANDOM_NUMBER': 0}]};
+var jogador = JSON.parse(sessionStorage.getItem("player"));
+function comeco(){
+  var jogador = JSON.parse(sessionStorage.getItem("player"));
+  if (!jogador && INGAME == 0) {
+    jogador = player_inicio;
+    sessionStorage.setItem("player", JSON.stringify(player_inicio));
+  }
+}
+comeco();
 
-var player = sessionStorage.getItem("player");
-if (!player) {
-  sessionStorage.setItem("player", JSON.stringify(player_inicio));
+
+function carregaVariaveis(){
+  LETTER_COUNT = jogador.player[numplayer].LETTER_COUNT;
+   TEMA_ATUAL = jogador.player[numplayer].TEMA_ATUAL;
+   AVATAR = jogador.player[numplayer].AVATAR;
+   INGAME = jogador.player[numplayer].INGAME;
+   ERROR_COUNT = jogador.player[numplayer].ERROR_COUNT;
+   HIT_COUNT = jogador.player[numplayer].HIT_COUNT;
+   PASS_COUNT = jogador.player[numplayer].PASS_COUNT;
+   LAST_RANDOM_NUMBER = jogador.player[numplayer].LAST_RANDOM_NUMBER;
 }
 
+function salvarVariaveis(){
+  jogador.player[numplayer].LETTER_COUNT = LETTER_COUNT;
+  jogador.player[numplayer].TEMA_ATUAL = TEMA_ATUAL;
+  jogador.player[numplayer].AVATAR = AVATAR;
+  jogador.player[numplayer].INGAME = INGAME;
+  jogador.player[numplayer].ERROR_COUNT = ERROR_COUNT;
+  jogador.player[numplayer].HIT_COUNT = HIT_COUNT;
+  jogador.player[numplayer].PASS_COUNT = PASS_COUNT;
+  jogador.player[numplayer].LAST_RANDOM_NUMBER = LAST_RANDOM_NUMBER;
+  sessionStorage.setItem('player', JSON.stringify(jogador));
+}
+
+carregaVariaveis();
+salvarVariaveis();
 
 const ALFABETO = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
@@ -39,6 +70,8 @@ function getRandomInt(min, max) {
 //i é o numero da letra, 0=a
 //TODO: pular letras faltantes
 function LerPergunta(i) {
+
+
     if (localStorage.getItem('DADOS')) {
         DB = JSON.parse(localStorage.getItem('DADOS'))
     }
@@ -48,6 +81,7 @@ function LerPergunta(i) {
         while (DB[TEMA_ATUAL][parseInt(i)][LAST_RANDOM_NUMBER] == null) {
             LETTER_COUNT++;
             i++;
+            salvarVariaveis();
             if(DB[TEMA_ATUAL][parseInt(i)] == null){LETTER_COUNT=26; FinalizaJogo(26);}
         }
         var pergunta = DB[TEMA_ATUAL][parseInt(i)][LAST_RANDOM_NUMBER].pergunta;
@@ -60,13 +94,16 @@ function LerPergunta(i) {
     } else {
         location = "./tela_final.html";
     }
+
 }
 
 function PassouAPalavra() {
+
     LetraFoco(LETTER_COUNT, true);
     colorirCircle(3);
     PASS_COUNT++;
     LETTER_COUNT++;
+    salvarVariaveis();
     if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
         FinalizaJogo(26);
     } else {
@@ -79,6 +116,8 @@ function contador() {
     document.getElementById("respostaFinal").innerHTML = "Voce acertou " + HIT_COUNT + " perguntas!";
     sessionStorage.setItem('HIT', 0);
 }
+
+
 
 //Reseta as variaveis globais e redireciona para a tela correspondente ao parametro
 function router(where_from, tema) {
@@ -125,10 +164,13 @@ function router(where_from, tema) {
         //INGAME = true;
         sessionStorage.setItem('INGAME', 1);
     }
+    jogador = player_inicio;
+    sessionStorage.setItem('player', JSON.stringify(jogador));
 }
 
 //Confere o valor no Form=form-resposta com o .resposta no JSON
 function ConfereResposta(i) {
+
     if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
         FinalizaJogo(27);
     } else {
@@ -149,7 +191,9 @@ function ConfereResposta(i) {
             HIT_COUNT++;
             sessionStorage.setItem("HIT", HIT_COUNT);
             LETTER_COUNT++;
+            salvarVariaveis();
             if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
+              salvarVariaveis();
                 FinalizaJogo(26);
             } else {
                 LerPergunta(LETTER_COUNT);
@@ -160,6 +204,7 @@ function ConfereResposta(i) {
             colorirCircle(2);
             ERROR_COUNT++;
             LETTER_COUNT++;
+            salvarVariaveis();
             if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
                 FinalizaJogo(26);
             } else {
@@ -313,4 +358,11 @@ function saveGameMode() {
       sessionStorage.setItem("tempo", document.getElementsByName('tempo')[i].value);
     }
   }
+}
+
+// multiplayer
+
+function mudarJogador(){
+
+
 }
