@@ -47,6 +47,59 @@
       </div>
     </header>
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content unicomodal" >
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modalidadde</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h5>Tempo</h5>
+            <div class="row">
+              <div class="col-6 text-center" >
+                <button type="button" class="btn btn-secondary">
+                  <img src="../img/portfolio/comtempo.png" alt="Com Tempo" width="40px" height="40px">
+                  <br><p>Com tempo<br>
+                  <input type="radio" name="tempo"></p>
+                </button>
+              </div>
+              <div class="col-6 text-center" >
+                <button type="button" class="btn btn-secondary">
+                  <img src="../img/portfolio/semtempo.png" alt="Com Tempo" width="40px" height="40px">
+                  <br><p>Sem tempo<br>
+                  <input type="radio" name="tempo"></p>
+                </button>
+              </div>
+            </div>
+            
+            <hr>
+            <h5>Jogador</h5>
+            <div class="row">
+                <div class="col-sm text-center">
+                  <button type="button" class="btn btn-secondary">
+                    <img src="../img/portfolio/one.png" alt="Com Tempo" width="40px" height="40px">
+                    <br><p>1 Jogador<br>
+                    <input type="radio" name="Jogador"></p>
+                  </button>
+                </div>
+                <div class="col-sm text-center">
+                  <button type="button" class="btn btn-secondary">
+                    <img src="../img/portfolio/vs.png" alt="Com Tempo" width="60px" height="40px">
+                    <br><p>2 Jogador<br>
+                    <input type="radio" name="Jogador"></p>
+                  </button>
+                </div>
+            </div><br>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Salvar escolha</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
         <!-- Bootstrap core JavaScript -->
         <script src="../vendor/jquery/jquery.min.js"></script>
@@ -65,6 +118,13 @@
 
         <!-- JS para criar os circulos -->
         <script src="../js/circles.js"></script>
+
+        <!-- JS MODAL-->
+        <script>
+           $(function(){
+            $('#exampleModal').modal('show');
+          });
+        </script>
   </body>
 
 </html>
