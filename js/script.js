@@ -36,7 +36,9 @@ function LerPergunta(i) {
     }
     if (LETTER_COUNT < 26 || perguntas_passadas.length) {
         TEMA_ATUAL = sessionStorage.getItem('TEMA_ATUAL');
-        LAST_RANDOM_NUMBER = getRandomInt(0, DB[TEMA_ATUAL][parseInt(i)].length - 1);
+        if(marcador_fim == 0){
+            LAST_RANDOM_NUMBER = getRandomInt(0, DB[TEMA_ATUAL][parseInt(i)].length - 1);
+        }
         while (DB[TEMA_ATUAL][parseInt(i)][LAST_RANDOM_NUMBER] == null) {
             LETTER_COUNT++;
             i++;
