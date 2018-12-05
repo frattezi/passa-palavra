@@ -15,6 +15,15 @@ let HIT_COUNT = 0;
 let PASS_COUNT = 0;
 //Salva ultimo numero random
 let LAST_RANDOM_NUMBER = 0;
+// Cria objeto player para salvar todas as variaveis de multijogador
+
+let player_inicio ={ 'player': [{'HIT_COUNT': '0', 'AVATAR': '7', 'INGAME': '0', 'LETTER_COUNT': '0', 'ERROR_COUNT': '0', 'PASS_COUNT': '0', 'LAST_RANDOM_NUMBER': '0'},{'HIT_COUNT': '0', 'AVATAR': '7', 'INGAME': '0', 'LETTER_COUNT': '0', 'ERROR_COUNT': '0', 'PASS_COUNT': '0', 'LAST_RANDOM_NUMBER': '0'}]};
+
+var player = sessionStorage.getItem("player");
+if (!player) {
+  sessionStorage.setItem("player", JSON.stringify(player_inicio));
+}
+
 
 const ALFABETO = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
