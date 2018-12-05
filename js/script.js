@@ -15,7 +15,8 @@ let HIT_COUNT = 0;
 let PASS_COUNT = 0;
 //Salva ultimo numero random
 let LAST_RANDOM_NUMBER = 0;
-
+let marcador_fim = 0;
+let perguntas_passadas = []
 const ALFABETO = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
 function SetAvatar(i) {
@@ -33,7 +34,7 @@ function LerPergunta(i) {
     if (localStorage.getItem('DADOS')) {
         DB = JSON.parse(localStorage.getItem('DADOS'))
     }
-    if (LETTER_COUNT < 26) {
+    if (LETTER_COUNT < 26 || perguntas_passadas.length) {
         TEMA_ATUAL = sessionStorage.getItem('TEMA_ATUAL');
         LAST_RANDOM_NUMBER = getRandomInt(0, DB[TEMA_ATUAL][parseInt(i)].length - 1);
         while (DB[TEMA_ATUAL][parseInt(i)][LAST_RANDOM_NUMBER] == null) {
@@ -46,14 +47,19 @@ function LerPergunta(i) {
         $('#question').textfill({
             maxFontPixels: 0
         });
-        LetraFoco(LETTER_COUNT, false);
+        LetraFoco(i, false);
         return pergunta;
     } else {
-        location = "./tela_final.html";
+        FinalizaJogo(26);
     }
 }
 
 function PassouAPalavra() {
+    let dado_passou_palavra = {}
+    dado_passou_palavra.indice = LETTER_COUNT;
+    dado_passou_palavra.random = LAST_RANDOM_NUMBER;
+    perguntas_passadas.push(dado_passou_palavra)
+
     LetraFoco(LETTER_COUNT, true);
     colorirCircle(3);
     PASS_COUNT++;
@@ -119,19 +125,18 @@ function router(where_from, tema) {
 }
 
 //Confere o valor no Form=form-resposta com o .resposta no JSON
-function ConfereResposta(i) {
-    if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
+function ConfereResposta(i, random) {
+    if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26 && !perguntas_passadas.length) {
         FinalizaJogo(27);
     } else {
-        LetraFoco(LETTER_COUNT, true);
+        LetraFoco(i, true);
         var Fres = document.getElementById('form-resposta').Fresposta.value;
-        var JSres = DB[TEMA_ATUAL][i][LAST_RANDOM_NUMBER].resposta;
+        var JSres = DB[TEMA_ATUAL][i][random || LAST_RANDOM_NUMBER].resposta;
 
         document.getElementById('form-resposta').Fresposta.value = '';
 
         Fres = TratamentoString(Fres);
         JSres = TratamentoString(JSres);
-
         //Resposta correta
         if (Fres == '') {
             PassouAPalavra();
@@ -194,11 +199,20 @@ function TratamentoString(str) {
 
 //Finaliza o jogo
 function FinalizaJogo(i) {
-    if (i = 26) {
+    if (i = 26 && !perguntas_passadas.length) {
         document.getElementById('button-res').innerHTML = 'Finalizar Jogo';
         document.getElementById('button-res').onclick = function () {
-            router('tela_jogo', 0)
+        router('tela_jogo', 0)
         };
+    }else{
+        if(marcador_fim == 0){ 
+            perguntas_passadas.reverse()
+            marcador_fim = 1
+        }
+        let pergunta_atual = perguntas_passadas.pop()
+        LETTER_COUNT = pergunta_atual.indice
+        LAST_RANDOM_NUMBER = pergunta_atual.random
+        LerPergunta(pergunta_atual.indice)
     }
 }
 
