@@ -58,60 +58,64 @@
           </button>
         </div>
         <div class="modal-body">
-          <h5>Tempo</h5>
-          <div class="row">
-
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <form action="index.html" method="post">
 
 
-              <label class="btn">
-                <i class="far fa-clock fa-3x"></i>
-                <p></p>
-                <input type="radio" name="options" id="option1" autocomplete="off">Com tempo
-              </label>
+            <h5>Tempo</h5>
+
+            <div class="row">
+
+              <div class="col-auto">
+
+                <label class="btn">
+                  <i class="far fa-clock fa-3x"></i>
+                  <p></p>
+                  <input type="radio" name="options" id="option1" autocomplete="off" value="againsttime"> Com tempo
+                </label>
+              </div>
+              <div class="col-auto">
+
+                <label class="btn">
+                  <i class="fas fa-clock fa-3x"></i>
+                  <p></p>
+                  <input type="radio" name="options" id="option2" autocomplete="off" value="notime"> Sem tempo
+                </label>
+              </div>
+            </div>
+
+            <hr>
+
+            <h5>Jogador</h5>
+            <div class="row">
+              <div class="col-auto">
+                <label class="btn">
+                  <i class="fa fa-user fa-3x"></i>
+                  <p></p>
+                  <input type="radio" name="user2" id="option3" autocomplete="off" value="singleplayer"> Um Jogador
+                </label>
+
+              </div>
+              <div class="col-auto">
+                <label class="btn">
+                  <i class="fa fa-user-friends fa-3x"></i>
+                  <p></p>
+                  <input type="radio" name="user2" id="option3" autocomplete="off" value="twoplayer"> Dois Jogadores
+                </label>
+
+              </div>
 
 
 
-              <label class="btn">
-                <i class="fas fa-clock fa-3x"></i>
-                <p></p>
-                <input type="radio" name="options" id="option2" autocomplete="off">Sem tempo
-              </label>
+              <br>
 
 
             </div>
-          </div>
-
-          <hr>
-
-          <h5>Jogador</h5>
-          <div class="row">
-
-            <div class="btn-group-toggle" data-toggle="buttons">
-
-              <label class="btn">
-                <i class="fa fa-user fa-3x"></i>
-                <p></p>
-                <input type="radio" name="user" id="option3" autocomplete="off">Com tempo
-              </label>
-
-              <label class="btn">
-                <i class="fas fa-user-friends fa-3x"></i>
-                <p></p>
-                <input type="radio" name="user" id="option4" autocomplete="off">Sem tempo
-              </label>
-
-            </div>
-
-            <br>
-
-
             <div class="modal-footer">
               <button type="button" class="btn btn-primary" data-dismiss="modal">Salvar escolha</button>
             </div>
-          </div>
         </div>
       </div>
+      </form>
 
       <!-- Bootstrap core JavaScript -->
       <script src="../vendor/jquery/jquery.min.js"></script>
