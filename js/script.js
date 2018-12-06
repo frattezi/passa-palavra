@@ -135,8 +135,20 @@ function PassouAPalavra() {
 
 function contador() {
     HIT_COUNT = sessionStorage.getItem('HIT');
-    document.getElementById("respostaFinal").innerHTML = "Voce acertou " + HIT_COUNT + " perguntas!";
+    var contadorFinal = sessionStorage.getItem('resultados');
+
+    if (sessionStorage.getItem('jogador') == "multiplayer") {
+      if (contadorFinal[0] > contadorFinal[2]) {
+        document.getElementById("respostaFinal").innerHTML = "O jogador 1 venceu! acertando " + contadorFinal[0] + " perguntas!<br><br> O jogador 2 acertou apenas "+ contadorFinal[2] +" perguntas!";
+      }else {
+        document.getElementById("respostaFinal").innerHTML = "O jogador 2 venceu! acertando " + contadorFinal[2] + " perguntas!<br><br> O jogador 1 acertou apenas "+ contadorFinal[0] +" perguntas!";
+      }
+    }else {
+
+      document.getElementById("respostaFinal").innerHTML = "Voce acertou " + HIT_COUNT + " perguntas!";
+    }
     sessionStorage.setItem('HIT', 0);
+
 }
 
 
@@ -186,8 +198,11 @@ function router(where_from, tema) {
         //INGAME = true;
         sessionStorage.setItem('INGAME', 1);
     }
-    jogador = player_inicio;
-    sessionStorage.setItem('player', JSON.stringify(jogador));
+      var resultados = [jogador.player[0].HIT_COUNT, jogador.player[1].HIT_COUNT];
+      sessionStorage.setItem('resultados', resultados);
+      jogador = player_inicio;
+      sessionStorage.setItem('player', JSON.stringify(jogador));
+
 }
 
 //Confere o valor no Form=form-resposta com o .resposta no JSON
