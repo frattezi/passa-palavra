@@ -17,10 +17,69 @@ let PASS_COUNT = 0;
 let LAST_RANDOM_NUMBER = 0;
 let marcador_fim = 0;
 let perguntas_passadas = []
+// Cria objeto player para salvar todas as variaveis de multijogador
+sessionStorage.setItem("numplayer", 0);
+var numplayer = sessionStorage.getItem('numplayer');
+
+
+function mudarJogador(){
+  if (sessionStorage.getItem('jogador') == "multiplayer") {
+    if (numplayer == 1) {
+      numplayer = 0;
+      sessionStorage.setItem('numplayer', 0);
+    }else {
+      numplayer = 1;
+      sessionStorage.setItem('numplayer', 1);
+    }
+    resetarCores();
+    colorirTudo();
+  }
+
+}
+
+let corCirculos = {'player': [{'cores': []},{'cores': []}]};
+
+let player_inicio ={ 'player': [{'HIT_COUNT': 0, 'LETTER_COUNT': 0, 'ERROR_COUNT': 0, 'PASS_COUNT': 0, 'LAST_RANDOM_NUMBER': 0, 'cores': []},{'HIT_COUNT': 0, 'LETTER_COUNT': 0, 'ERROR_COUNT': 0, 'PASS_COUNT': 0, 'LAST_RANDOM_NUMBER': 0, 'cores': []}]};
+var jogador = JSON.parse(sessionStorage.getItem("player"));
+
+function comeco(){
+  var jogador = JSON.parse(sessionStorage.getItem("player"));
+  if (!jogador && INGAME == 0) {
+    jogador = player_inicio;
+    sessionStorage.setItem("player", JSON.stringify(player_inicio));
+  }
+}
+comeco();
+
+
+function carregaVariaveis(){
+  LETTER_COUNT = jogador.player[numplayer].LETTER_COUNT;
+   TEMA_ATUAL = jogador.player[numplayer].TEMA_ATUAL;
+   INGAME = jogador.player[numplayer].INGAME;
+   ERROR_COUNT = jogador.player[numplayer].ERROR_COUNT;
+   HIT_COUNT = jogador.player[numplayer].HIT_COUNT;
+   PASS_COUNT = jogador.player[numplayer].PASS_COUNT;
+   LAST_RANDOM_NUMBER = jogador.player[numplayer].LAST_RANDOM_NUMBER;
+}
+
+function salvarVariaveis(){
+  jogador.player[numplayer].LETTER_COUNT = LETTER_COUNT;
+  jogador.player[numplayer].TEMA_ATUAL = TEMA_ATUAL;
+  jogador.player[numplayer].INGAME = INGAME;
+  jogador.player[numplayer].ERROR_COUNT = ERROR_COUNT;
+  jogador.player[numplayer].HIT_COUNT = HIT_COUNT;
+  jogador.player[numplayer].PASS_COUNT = PASS_COUNT;
+  jogador.player[numplayer].LAST_RANDOM_NUMBER = LAST_RANDOM_NUMBER;
+  sessionStorage.setItem('player', JSON.stringify(jogador));
+}
+
+carregaVariaveis();
+salvarVariaveis();
+
 const ALFABETO = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
-function SetAvatar(i) {
-    sessionStorage.setItem('AVATAR', i);
+function SetAvatar(i,j) {
+    sessionStorage.setItem('AVATAR_' + j, i);
     router("tela_final", 0);
 }
 
@@ -31,6 +90,8 @@ function getRandomInt(min, max) {
 //i é o numero da letra, 0=a
 //TODO: pular letras faltantes
 function LerPergunta(i) {
+
+
     if (localStorage.getItem('DADOS')) {
         DB = JSON.parse(localStorage.getItem('DADOS'))
     }
@@ -42,6 +103,7 @@ function LerPergunta(i) {
         while (DB[TEMA_ATUAL][parseInt(i)][LAST_RANDOM_NUMBER] == null) {
             LETTER_COUNT++;
             i++;
+            salvarVariaveis();
             if(DB[TEMA_ATUAL][parseInt(i)] == null){LETTER_COUNT=26; FinalizaJogo(26);}
         }
         var pergunta = DB[TEMA_ATUAL][parseInt(i)][LAST_RANDOM_NUMBER].pergunta;
@@ -54,6 +116,7 @@ function LerPergunta(i) {
     } else {
         FinalizaJogo(26);
     }
+
 }
 
 function PassouAPalavra() {
@@ -66,18 +129,35 @@ function PassouAPalavra() {
     colorirCircle(3);
     PASS_COUNT++;
     LETTER_COUNT++;
+    salvarVariaveis();
     if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
         FinalizaJogo(26);
     } else {
+        mudarJogador();
+        carregaVariaveis();
         LerPergunta(LETTER_COUNT);
     }
 }
 
 function contador() {
     HIT_COUNT = sessionStorage.getItem('HIT');
-    document.getElementById("respostaFinal").innerHTML = "Voce acertou " + HIT_COUNT + " perguntas!";
+    var contadorFinal = sessionStorage.getItem('resultados');
+
+    if (sessionStorage.getItem('jogador') == "multiplayer") {
+      if (contadorFinal[0] > contadorFinal[2]) {
+        document.getElementById("respostaFinal").innerHTML = "O jogador 1 venceu! acertando " + contadorFinal[0] + " perguntas!<br><br> O jogador 2 acertou apenas "+ contadorFinal[2] +" perguntas!";
+      }else {
+        document.getElementById("respostaFinal").innerHTML = "O jogador 2 venceu! acertando " + contadorFinal[2] + " perguntas!<br><br> O jogador 1 acertou apenas "+ contadorFinal[0] +" perguntas!";
+      }
+    }else {
+
+      document.getElementById("respostaFinal").innerHTML = "Voce acertou " + HIT_COUNT + " perguntas!";
+    }
     sessionStorage.setItem('HIT', 0);
+
 }
+
+
 
 //Reseta as variaveis globais e redireciona para a tela correspondente ao parametro
 function router(where_from, tema) {
@@ -86,44 +166,59 @@ function router(where_from, tema) {
         location = "./views/tela_temas.html";
         //INGAME = false;
         sessionStorage.setItem('INGAME', 0);
+
     } else if (where_from == "menu") {
         sessionStorage.setItem('HIT_COUNT', 0);
         location = "./tela_jogo.html";
         //INGAME = true;
         sessionStorage.setItem('INGAME', 1);
+
     } else if (where_from == "criarTemas") {
         sessionStorage.setItem('HIT_COUNT', 0);
         location = "./tela_criar_tema.html";
+
     } else if (where_from == "personalizar") {
         sessionStorage.setItem('HIT_COUNT', 0);
         location = "./views/tela_criar_tema.html";
+
     } else if (where_from == "escolheAvatar") {
         sessionStorage.setItem('HIT_COUNT', 0);
         location = "./views/tela_avatar.html";
+
     } else if (where_from == "themeSelection") {
         sessionStorage.setItem('TEMA_ATUAL', tema);
         sessionStorage.setItem('HIT_COUNT', 0);
         location = "../views/tela_jogo.html";
         //INGAME = true;
         sessionStorage.setItem('INGAME', 1);
+
     } else if (where_from == "tela_final") {
         location = "../index.html";
         //INGAME = false;
         sessionStorage.setItem('INGAME', 0);
+
     } else if (where_from == "tela_jogo") {
         location = "./tela_final.html";
         //INGAME = false;
         sessionStorage.setItem('INGAME', 0);
+
     } else if (where_from == "tela_criar_tema") {
         location = "../index.html";
         //INGAME = false;
         sessionStorage.setItem('INGAME', 0);
+
     } else {
         sessionStorage.setItem('HIT_COUNT', 0);
         location = "../views/tela_jogo.html";
         //INGAME = true;
         sessionStorage.setItem('INGAME', 1);
+
     }
+      var resultados = [jogador.player[0].HIT_COUNT, jogador.player[1].HIT_COUNT];
+      sessionStorage.setItem('resultados', resultados);
+      jogador = player_inicio;
+      sessionStorage.setItem('player', JSON.stringify(jogador));
+
 }
 
 //Confere o valor no Form=form-resposta com o .resposta no JSON
@@ -147,7 +242,9 @@ function ConfereResposta(i, random) {
             HIT_COUNT++;
             sessionStorage.setItem("HIT", HIT_COUNT);
             LETTER_COUNT++;
+            salvarVariaveis();
             if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
+              salvarVariaveis();
                 FinalizaJogo(26);
             } else {
                 LerPergunta(LETTER_COUNT);
@@ -158,9 +255,12 @@ function ConfereResposta(i, random) {
             colorirCircle(2);
             ERROR_COUNT++;
             LETTER_COUNT++;
+            salvarVariaveis();
             if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
                 FinalizaJogo(26);
             } else {
+                mudarJogador();
+                carregaVariaveis();
                 LerPergunta(LETTER_COUNT);
             }
         }
@@ -207,7 +307,7 @@ function FinalizaJogo(i) {
         router('tela_jogo', 0)
         };
     }else{
-        if(marcador_fim == 0){ 
+        if(marcador_fim == 0){
             perguntas_passadas.reverse()
             marcador_fim = 1
         }
@@ -294,9 +394,9 @@ function preencheQuestoes() {
                 document.getElementById('campo-questoes').innerHTML += `
                 <button class="btn btn-light" onclick="deleteArray('${campoTema}',${cont},${cont2})"><img width="20px" src="../img/trash.svg"></button>
                 <button class="btn btn-light" onclick="editArray('${campoTema}',${cont},${cont2})"><img width="20px" src="../img/pencil.svg"></button>
-                Tema: ${campoTema}  
-                - Letra: ${String.fromCharCode(cont+65)} 
-                - Pergunta: ${regNovo[campoTema][cont][cont2].pergunta} 
+                Tema: ${campoTema}
+                - Letra: ${String.fromCharCode(cont+65)}
+                - Pergunta: ${regNovo[campoTema][cont][cont2].pergunta}
                 - Resposta: ${regNovo[campoTema][cont][cont2].resposta} <br>`;
             }
         }
@@ -309,4 +409,15 @@ function editArray(tema, x, y) {
     document.getElementById('campo-resposta').value = regNovo[tema][x][y].resposta;
     deleteArray(tema, x, y);
 
+}
+
+function saveGameMode() {
+  for (var i = 0; i < 2; i++) {
+    if (document.getElementsByName('jogador')[i].checked){
+      sessionStorage.setItem("jogador", document.getElementsByName('jogador')[i].value);
+    }
+    if (document.getElementsByName('tempo')[i].checked){
+      sessionStorage.setItem("tempo", document.getElementsByName('tempo')[i].value);
+    }
+  }
 }
