@@ -37,7 +37,7 @@ function mudarJogador(){
 
 let corCirculos = {'player': [{'cores': []},{'cores': []}]};
 
-let player_inicio ={ 'player': [{'HIT_COUNT': 0, 'AVATAR': 7, 'LETTER_COUNT': 0, 'ERROR_COUNT': 0, 'PASS_COUNT': 0, 'LAST_RANDOM_NUMBER': 0, 'cores': []},{'HIT_COUNT': 0, 'AVATAR': 7, 'LETTER_COUNT': 0, 'ERROR_COUNT': 0, 'PASS_COUNT': 0, 'LAST_RANDOM_NUMBER': 0, 'cores': []}]};
+let player_inicio ={ 'player': [{'HIT_COUNT': 0, 'LETTER_COUNT': 0, 'ERROR_COUNT': 0, 'PASS_COUNT': 0, 'LAST_RANDOM_NUMBER': 0, 'cores': []},{'HIT_COUNT': 0, 'LETTER_COUNT': 0, 'ERROR_COUNT': 0, 'PASS_COUNT': 0, 'LAST_RANDOM_NUMBER': 0, 'cores': []}]};
 var jogador = JSON.parse(sessionStorage.getItem("player"));
 
 function comeco(){
@@ -53,7 +53,6 @@ comeco();
 function carregaVariaveis(){
   LETTER_COUNT = jogador.player[numplayer].LETTER_COUNT;
    TEMA_ATUAL = jogador.player[numplayer].TEMA_ATUAL;
-   AVATAR = jogador.player[numplayer].AVATAR;
    INGAME = jogador.player[numplayer].INGAME;
    ERROR_COUNT = jogador.player[numplayer].ERROR_COUNT;
    HIT_COUNT = jogador.player[numplayer].HIT_COUNT;
@@ -64,7 +63,6 @@ function carregaVariaveis(){
 function salvarVariaveis(){
   jogador.player[numplayer].LETTER_COUNT = LETTER_COUNT;
   jogador.player[numplayer].TEMA_ATUAL = TEMA_ATUAL;
-  jogador.player[numplayer].AVATAR = AVATAR;
   jogador.player[numplayer].INGAME = INGAME;
   jogador.player[numplayer].ERROR_COUNT = ERROR_COUNT;
   jogador.player[numplayer].HIT_COUNT = HIT_COUNT;
@@ -78,8 +76,8 @@ salvarVariaveis();
 
 const ALFABETO = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
-function SetAvatar(i) {
-    sessionStorage.setItem('AVATAR', i);
+function SetAvatar(i,j) {
+    sessionStorage.setItem('AVATAR_' + j, i);
     router("tela_final", 0);
 }
 
@@ -160,43 +158,53 @@ function router(where_from, tema) {
         location = "./views/tela_temas.html";
         //INGAME = false;
         sessionStorage.setItem('INGAME', 0);
+
     } else if (where_from == "menu") {
         sessionStorage.setItem('HIT_COUNT', 0);
         location = "./tela_jogo.html";
         //INGAME = true;
         sessionStorage.setItem('INGAME', 1);
+
     } else if (where_from == "criarTemas") {
         sessionStorage.setItem('HIT_COUNT', 0);
         location = "./tela_criar_tema.html";
+
     } else if (where_from == "personalizar") {
         sessionStorage.setItem('HIT_COUNT', 0);
         location = "./views/tela_criar_tema.html";
+
     } else if (where_from == "escolheAvatar") {
         sessionStorage.setItem('HIT_COUNT', 0);
         location = "./views/tela_avatar.html";
+
     } else if (where_from == "themeSelection") {
         sessionStorage.setItem('TEMA_ATUAL', tema);
         sessionStorage.setItem('HIT_COUNT', 0);
         location = "../views/tela_jogo.html";
         //INGAME = true;
         sessionStorage.setItem('INGAME', 1);
+
     } else if (where_from == "tela_final") {
         location = "../index.html";
         //INGAME = false;
         sessionStorage.setItem('INGAME', 0);
+
     } else if (where_from == "tela_jogo") {
         location = "./tela_final.html";
         //INGAME = false;
         sessionStorage.setItem('INGAME', 0);
+
     } else if (where_from == "tela_criar_tema") {
         location = "../index.html";
         //INGAME = false;
         sessionStorage.setItem('INGAME', 0);
+
     } else {
         sessionStorage.setItem('HIT_COUNT', 0);
         location = "../views/tela_jogo.html";
         //INGAME = true;
         sessionStorage.setItem('INGAME', 1);
+
     }
       var resultados = [jogador.player[0].HIT_COUNT, jogador.player[1].HIT_COUNT];
       sessionStorage.setItem('resultados', resultados);

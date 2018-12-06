@@ -25,6 +25,7 @@ function resetarCores(){
     document.getElementById("circle-" + String.fromCharCode(i + 65)).classList.add("btn-basic");
     document.getElementById("form-resposta").reset();
   }
+  mudaFoto();
 }
 
 function colorirTudo(){
