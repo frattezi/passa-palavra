@@ -69,6 +69,14 @@ function createCircles(){
     r += (360/26);
     document.getElementById('circle-container').appendChild(circle);
   }
-  
+  for (var i = 65; i < 91; i++) {
+    var circle = document.createElement('div');
+    circle.id = "circle-"+String.fromCharCode(i);
+    circle.className = "alfabeto rounded-circle text-center btn-basic";
+    circle.innerHTML = String.fromCharCode(i);
+    circle.style.transform = "rotate("+ r +"deg) translate(10em) rotate("+ -r +"deg)";
+    r += (360/26);
+    document.getElementById('circle-container-1').appendChild(circle);
+  }
 }
 createCircles();
