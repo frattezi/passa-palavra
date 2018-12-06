@@ -24,17 +24,36 @@ var numplayer = sessionStorage.getItem('numplayer');
 
 function mudarJogador() {
   if (sessionStorage.getItem('jogador') == "multiplayer") {
-    if (numplayer == 1 && jogador.player[0].marcador_fim && jogador.player[0].perguntas_passadas.lenght ) {
-      numplayer = 0;
-      sessionStorage.setItem('numplayer', 0);
-    } else if(jogador.player[1].marcador_fim && jogador.player[1].perguntas_passadas.lenght){
-      numplayer = 1;
-      sessionStorage.setItem('numplayer', 1);
+    if (numplayer == 1) {
+      if (jogador.player[0].marcador_fim){
+        if (jogador.player[0].perguntas_passadas.lenght){
+          numplayer = 0;
+          sessionStorage.setItem('numplayer', 0);
+        }
+        else{
+          return
+        }
+      }else{
+        numplayer = 0;
+        sessionStorage.setItem('numplayer', 0);
+      }
+    }else {
+      if(jogador.player[1].marcador_fim){
+        if(jogador.player[1].perguntas_passadas.lenght){
+          numplayer = 1;
+          sessionStorage.setItem('numplayer', 1);
+        }else{
+          return
+        }
+      }else{
+        numplayer = 1;
+        sessionStorage.setItem('numplayer', 1);
+      }
     }
+
     resetarCores();
     colorirTudo();
   }
-
 }
 
 let corCirculos = {
@@ -347,6 +366,16 @@ function TratamentoString(str) {
 function FinalizaJogo(i) {
   carregaVariaveis();
   if (i = 26 && !perguntas_passadas.length || i == -1) {
+
+    if(numplayer == 1 && jogador.player[1].perguntas_passadas){
+      console.log("here4")
+      jogador.player[0].perguntas_passadas.lenght
+      mudarJogador()
+    }
+    if(numplayer == 0 && jogador.player[0].perguntas_passadas){
+      mudarJogador()
+    }
+    console.log("here2")
     document.getElementById('button-res').innerHTML = 'Finalizar Jogo';
     document.getElementById('button-res').onclick = function() {
       router('tela_jogo', 0)
