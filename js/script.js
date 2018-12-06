@@ -16,10 +16,30 @@ let PASS_COUNT = 0;
 //Salva ultimo numero random
 let LAST_RANDOM_NUMBER = 0;
 // Cria objeto player para salvar todas as variaveis de multijogador
-var numplayer = 0;
+sessionStorage.setItem("numplayer", 0);
+var numplayer = sessionStorage.getItem('numplayer');
 
-let player_inicio ={ 'player': [{'HIT_COUNT': 0, 'AVATAR': 7, 'LETTER_COUNT': 0, 'ERROR_COUNT': 0, 'PASS_COUNT': 0, 'LAST_RANDOM_NUMBER': 0},{'HIT_COUNT': 0, 'AVATAR': 7, 'LETTER_COUNT': 0, 'ERROR_COUNT': 0, 'PASS_COUNT': 0, 'LAST_RANDOM_NUMBER': 0}]};
+
+function mudarJogador(){
+  if (sessionStorage.getItem('jogador') == "multiplayer") {
+    if (numplayer == 1) {
+      numplayer = 0;
+      sessionStorage.setItem('numplayer', 0);
+    }else {
+      numplayer = 1;
+      sessionStorage.setItem('numplayer', 1);
+    }
+    resetarCores();
+    colorirTudo();
+  }
+
+}
+
+let corCirculos = {'player': [{'cores': []},{'cores': []}]};
+
+let player_inicio ={ 'player': [{'HIT_COUNT': 0, 'AVATAR': 7, 'LETTER_COUNT': 0, 'ERROR_COUNT': 0, 'PASS_COUNT': 0, 'LAST_RANDOM_NUMBER': 0, 'cores': []},{'HIT_COUNT': 0, 'AVATAR': 7, 'LETTER_COUNT': 0, 'ERROR_COUNT': 0, 'PASS_COUNT': 0, 'LAST_RANDOM_NUMBER': 0, 'cores': []}]};
 var jogador = JSON.parse(sessionStorage.getItem("player"));
+
 function comeco(){
   var jogador = JSON.parse(sessionStorage.getItem("player"));
   if (!jogador && INGAME == 0) {
@@ -107,6 +127,8 @@ function PassouAPalavra() {
     if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
         FinalizaJogo(26);
     } else {
+        mudarJogador();
+        carregaVariaveis();
         LerPergunta(LETTER_COUNT);
     }
 }
@@ -208,6 +230,8 @@ function ConfereResposta(i) {
             if (parseInt(HIT_COUNT) + parseInt(ERROR_COUNT) + parseInt(PASS_COUNT) >= 26) {
                 FinalizaJogo(26);
             } else {
+                mudarJogador();
+                carregaVariaveis();
                 LerPergunta(LETTER_COUNT);
             }
         }
@@ -358,11 +382,4 @@ function saveGameMode() {
       sessionStorage.setItem("tempo", document.getElementsByName('tempo')[i].value);
     }
   }
-}
-
-// multiplayer
-
-function mudarJogador(){
-
-
 }
