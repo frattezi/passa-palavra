@@ -1,4 +1,4 @@
-
+var numplayer = sessionStorage.getItem('numplayer');
 function EscolheAvatar(idAvatar, inGame){
   var img = document.createElement("img");
   const pathMenu = "./";
@@ -37,20 +37,36 @@ function EscolheAvatar(idAvatar, inGame){
   }
   else if(idAvatar == 9){
     img = "img/portfolio/submarine.png";
-  }   
-  
+  }
+
   return path+img;
+}
+
+function mudaFoto(){
+
+  document.getElementById('circle-container').removeChild(document.getElementById('circle-container').childNodes[0]);
+  var m = document.createElement("img");
+
+  if((sessionStorage.getItem('AVATAR_' + numplayer)) == null){
+
+    sessionStorage.setItem('AVATAR_' + numplayer, '7');
+  }
+  AVATAR = sessionStorage.getItem('AVATAR_' + numplayer);
+
+  m.src = EscolheAvatar(AVATAR, INGAME);
+  document.getElementById('circle-container').insertBefore(m,document.getElementById('circle-container').firstChild);
 }
 
 function createCircles(){
   var r = 270;
   var m = document.createElement("img");
 
-  if((sessionStorage.getItem('AVATAR')) != null){
-    AVATAR = sessionStorage.getItem('AVATAR');
-  }else{
-    sessionStorage.setItem('AVATAR', '7');
+  if((sessionStorage.getItem('AVATAR_' + numplayer)) == null){
+
+    sessionStorage.setItem('AVATAR_' + numplayer, '7');
   }
+  AVATAR = sessionStorage.getItem('AVATAR_' + numplayer);
+
   if((sessionStorage.getItem('INGAME')) != null){
     INGAME = sessionStorage.getItem('INGAME');
   }else{
@@ -69,6 +85,6 @@ function createCircles(){
     r += (360/26);
     document.getElementById('circle-container').appendChild(circle);
   }
-  
+
 }
 createCircles();
